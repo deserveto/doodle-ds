@@ -43,7 +43,7 @@ import {
   UploadIcon,
   UserIcon,
   XCircleIcon,
-} from "@sangui/icons";
+} from "@sangisalarp/icons";
 import {
   ArrowRight,
   Bell,
@@ -111,7 +111,7 @@ import {
   Tag,
   Textarea,
   Tooltip,
-} from "@sangui/ui";
+} from "@sangisalarp/ui";
 import { DoodleArrow, DoodleStar, Section, Demo } from "../decor";
 
 export function Components() {

@@ -8,20 +8,20 @@ Playful neo-brutalist React design system. Tokens, Scribbles icons, UI component
 
 | Package | Use it for |
 | --- | --- |
-| `@sangui/tokens` | DTCG design tokens compiled to CSS custom properties |
-| `@sangui/icons` | Hand-drawn React icons with a consistent 24px grid |
-| `@sangui/ui` | React 19 components and the Tailwind CSS v4 theme |
-| `@sangui/docs` | The local showcase app (private; not published) |
+| `@sangisalarp/tokens` | DTCG design tokens compiled to CSS custom properties |
+| `@sangisalarp/icons` | Hand-drawn React icons with a consistent 24px grid |
+| `@sangisalarp/ui` | React 19 components and the Tailwind CSS v4 theme |
+| `@sangisalarp/docs` | The local showcase app (private; not published) |
 
 ## Install
 
 In a React 19 application:
 
 ```sh
-npm install @sangui/tokens @sangui/icons @sangui/ui
+npm install @sangisalarp/tokens @sangisalarp/icons @sangisalarp/ui
 ```
 
-`@sangui/ui` has peer dependencies on `react`, `react-dom`, and Tailwind CSS 4. Install the peers when they are not already in your app.
+`@sangisalarp/ui` has peer dependencies on `react`, `react-dom`, and Tailwind CSS 4. Install the peers when they are not already in your app.
 
 ### Fastest CSS setup
 
@@ -29,8 +29,8 @@ Use the precompiled stylesheet when the application does not need to generate Do
 
 ```css
 /* src/index.css, imported once by the app entrypoint */
-@import "@sangui/tokens/css/tokens.css";
-@import "@sangui/ui/styles.css";
+@import "@sangisalarp/tokens/css/tokens.css";
+@import "@sangisalarp/ui/styles.css";
 ```
 
 `styles.css` includes Tailwind preflight, the Doodle theme, component styles, and the custom utilities used by the package. Do not import `theme.css` as well in this mode.
@@ -42,9 +42,9 @@ If the application owns the Tailwind build, import the theme and explicitly scan
 ```css
 /* app.css — adjust the @source path to your CSS file location */
 @import "tailwindcss";
-@import "@sangui/tokens/css/tokens.css";
-@import "@sangui/ui/theme.css";
-@source "../node_modules/@sangui/ui/dist";
+@import "@sangisalarp/tokens/css/tokens.css";
+@import "@sangisalarp/ui/theme.css";
+@source "../node_modules/@sangisalarp/ui/dist";
 ```
 
 Use this integration instead of `styles.css`; importing both duplicates the Tailwind layers.
@@ -52,8 +52,8 @@ Use this integration instead of `styles.css`; importing both duplicates the Tail
 ## Use components and icons
 
 ```tsx
-import { SearchIcon } from "@sangui/icons";
-import { Button, Card, CardContent } from "@sangui/ui";
+import { SearchIcon } from "@sangisalarp/icons";
+import { Button, Card, CardContent } from "@sangisalarp/ui";
 
 export function WelcomeCard() {
   return (
@@ -116,7 +116,7 @@ Doodle DS has two companion artifacts: a Figma component library for composing s
 The token source of truth is the DTCG JSON in [`packages/tokens/tokens`](packages/tokens/tokens). A practical sync loop is:
 
 1. Maintain matching color, type, spacing, radius, and state variables in Figma. Export or import DTCG JSON with the team’s chosen token tool (for example, Tokens Studio), preserving the `semantic` and `dark` groups.
-2. Review the JSON change in Git, then run `npm run build` to regenerate `@sangui/tokens` CSS and the docs preview.
+2. Review the JSON change in Git, then run `npm run build` to regenerate `@sangisalarp/tokens` CSS and the docs preview.
 3. Designers validate the Figma library against the docs showcase; developers consume the generated CSS and semantic variables instead of copying hex values.
 
 The repository currently ships the DTCG source and React packages; the Figma library is a separate shared library that should be published and versioned alongside releases. If a token cannot be represented in both places, resolve the naming/value mismatch before shipping the component.
@@ -136,7 +136,7 @@ Build order matters: tokens → icons → ui → docs. Use the root `npm run bui
 Keep the three public packages on the same release line:
 
 ```sh
-npm install @sangui/tokens@latest @sangui/icons@latest @sangui/ui@latest
+npm install @sangisalarp/tokens@latest @sangisalarp/icons@latest @sangisalarp/ui@latest
 ```
 
 Before `1.0.0`, treat minor releases as potentially breaking and read the generated Changeset notes. For a code change, create a changeset with `npx changeset`, run `npm run verify`, and commit the changeset with the change.
@@ -147,13 +147,13 @@ For the first public release, confirm the npm scope, package visibility, and rel
 
 ```sh
 npm run verify
-npm pack --dry-run --workspace @sangui/tokens
-npm pack --dry-run --workspace @sangui/icons
-npm pack --dry-run --workspace @sangui/ui
+npm pack --dry-run --workspace @sangisalarp/tokens
+npm pack --dry-run --workspace @sangisalarp/icons
+npm pack --dry-run --workspace @sangisalarp/ui
 
-npm publish --workspace @sangui/tokens --access public
-npm publish --workspace @sangui/icons --access public
-npm publish --workspace @sangui/ui --access public
+npm publish --workspace @sangisalarp/tokens --access public
+npm publish --workspace @sangisalarp/icons --access public
+npm publish --workspace @sangisalarp/ui --access public
 ```
 
 Subsequent releases should use Changesets (`npm run version-packages`, then `npm run release`) so internal dependency ranges and changelogs stay synchronized.

@@ -1,15 +1,15 @@
-# @sangui/icons
+# @sangisalarp/icons
 
 Scribbles is the hand-drawn icon set for Doodle DS. Every icon uses a 24px viewBox, a 2px `currentColor` stroke, and round caps/joins.
 
 ## Install and use
 
 ```sh
-npm install @sangui/icons
+npm install @sangisalarp/icons
 ```
 
 ```tsx
-import { SearchIcon } from "@sangui/icons";
+import { SearchIcon } from "@sangisalarp/icons";
 
 export function SearchButton() {
   return (
@@ -26,12 +26,12 @@ Icons accept normal React SVG props. By default an icon is `aria-hidden`; pass a
 <SearchIcon title="Search" className="h-6 w-6" />
 ```
 
-The package also exposes authored SVG files through the `@sangui/icons/svg/*` export. React components and the barrel index are generated from [`assets/svg`](assets/svg) during every build; never edit generated files in `src/icons` by hand.
+The package also exposes authored SVG files through the `@sangisalarp/icons/svg/*` export. React components and the barrel index are generated from [`assets/svg`](assets/svg) during every build; never edit generated files in `src/icons` by hand.
 
 ## Development
 
 ```sh
-npm run build -w @sangui/icons
+npm run build -w @sangisalarp/icons
 ```
 
 Review new icons at 16px, 24px, and 32px and compare them with the checklist in [`ICONLIST.md`](ICONLIST.md). The [root README](../../README.md) explains how designers keep the icon set and Figma library aligned.

@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from "react";
 import { Dialog as DialogPrimitive } from "radix-ui";
-import { CloseIcon } from "@sangui/icons";
+import { CloseIcon } from "@sangisalarp/icons";
 import { cn } from "../lib/cn";
 
 export interface ModalProps

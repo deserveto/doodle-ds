@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Badge, Button } from "@sangui/ui";
-import { MoonIcon, SunIcon } from "@sangui/icons";
+import { Badge, Button } from "@sangisalarp/ui";
+import { MoonIcon, SunIcon } from "@sangisalarp/icons";
 import { Components } from "./docs/sections/Components";
 import { Foundations } from "./docs/sections/Foundations";
 import {

@@ -1,5 +1,5 @@
 {
-  "name": "@sangui/docs",
+  "name": "@sangisalarp/docs",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,9 +10,9 @@
     "typecheck": "tsc -b --noEmit"
   },
   "dependencies": {
-    "@sangui/icons": "^0.1.0",
-    "@sangui/tokens": "^0.1.0",
-    "@sangui/ui": "^0.1.0",
+    "@sangisalarp/icons": "^0.1.0",
+    "@sangisalarp/tokens": "^0.1.0",
+    "@sangisalarp/ui": "^0.1.0",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"

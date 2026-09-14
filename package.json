@@ -11,8 +11,8 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build -w @sangui/tokens && npm run build -w @sangui/icons && npm run build -w @sangui/ui && npm run build -w @sangui/docs",
-    "dev": "npm run dev -w @sangui/docs",
+    "build": "npm run build -w @sangisalarp/tokens && npm run build -w @sangisalarp/icons && npm run build -w @sangisalarp/ui && npm run build -w @sangisalarp/docs",
+    "dev": "npm run dev -w @sangisalarp/docs",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",

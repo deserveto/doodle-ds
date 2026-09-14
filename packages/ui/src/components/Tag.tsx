@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
-import { CloseIcon } from "@sangui/icons";
+import { CloseIcon } from "@sangisalarp/icons";
 import { cn } from "../lib/cn";
 
 type TagTone = "ink" | "sun" | "terra" | "sky" | "lavender" | "mint";

@@ -4,7 +4,7 @@ import {
   CheckCircleIcon,
   InfoIcon,
   XCircleIcon,
-} from "@sangui/icons";
+} from "@sangisalarp/icons";
 import { cn } from "../lib/cn";
 
 type AlertTone = "info" | "success" | "warning" | "danger";

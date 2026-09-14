@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "@sangui/tokens/css/tokens.css";
+import "@sangisalarp/tokens/css/tokens.css";
 import "./styles/app.css";
 import App from "./App";
 

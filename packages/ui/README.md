@@ -1,26 +1,26 @@
-# @sangui/ui
+# @sangisalarp/ui
 
 Playful neo-brutalist React 19 components with a Tailwind CSS v4 theme.
 
 ## Install and import
 
 ```sh
-npm install @sangui/tokens @sangui/icons @sangui/ui
+npm install @sangisalarp/tokens @sangisalarp/icons @sangisalarp/ui
 ```
 
 Import tokens before the precompiled component stylesheet:
 
 ```tsx
-import "@sangui/tokens/css/tokens.css";
-import "@sangui/ui/styles.css";
-import { Button } from "@sangui/ui";
+import "@sangisalarp/tokens/css/tokens.css";
+import "@sangisalarp/ui/styles.css";
+import { Button } from "@sangisalarp/ui";
 
 export function Example() {
   return <Button variant="sun">use doodles</Button>;
 }
 ```
 
-`styles.css` is the zero-configuration path: it bundles Tailwind preflight, the Doodle theme, and the utilities used by the published components. If your app owns Tailwind, import `@sangui/ui/theme.css` instead and add an `@source` entry for `node_modules/@sangui/ui/dist`; do not import both stylesheets. The full setup and a copy-paste example are in the [root README](../../README.md).
+`styles.css` is the zero-configuration path: it bundles Tailwind preflight, the Doodle theme, and the utilities used by the published components. If your app owns Tailwind, import `@sangisalarp/ui/theme.css` instead and add an `@source` entry for `node_modules/@sangisalarp/ui/dist`; do not import both stylesheets. The full setup and a copy-paste example are in the [root README](../../README.md).
 
 ## Exports
 
@@ -40,8 +40,8 @@ Native controls remain keyboard and screen-reader friendly when consumers provid
 ## Development
 
 ```sh
-npm run build -w @sangui/ui
-npm run typecheck -w @sangui/ui
+npm run build -w @sangisalarp/ui
+npm run typecheck -w @sangisalarp/ui
 ```
 
-The package depends on `@sangui/icons` at the same release line. Keep tokens, icons, and UI versions aligned when upgrading; the [root upgrade guide](../../README.md) covers the Changesets workflow.
+The package depends on `@sangisalarp/icons` at the same release line. Keep tokens, icons, and UI versions aligned when upgrading; the [root upgrade guide](../../README.md) covers the Changesets workflow.
