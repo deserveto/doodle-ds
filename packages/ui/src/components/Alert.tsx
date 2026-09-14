@@ -4,7 +4,7 @@ import {
   CheckCircleIcon,
   InfoIcon,
   XCircleIcon,
-} from "@doodle-ds/icons";
+} from "@sangui/icons";
 import { cn } from "../lib/cn";
 
 type AlertTone = "info" | "success" | "warning" | "danger";

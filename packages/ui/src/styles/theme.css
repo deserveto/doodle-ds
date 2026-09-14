@@ -1,13 +1,13 @@
 /* ---------------------------------------------------------------------------
  * Doodle DS theme — Tailwind v4 theme, base styles, doodle utilities.
- * Compiled by: @doodle-ds/ui (dist/theme.css), docs app, consumers.
- * Depends on: @doodle-ds/tokens/css (defines --ds-* variables).
+ * Compiled by: @sangui/ui (dist/theme.css), docs app, consumers.
+ * Depends on: @sangui/tokens/css (defines --ds-* variables).
  * ------------------------------------------------------------------------- */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* raw palette — sourced from @doodle-ds/tokens */
+  /* raw palette — sourced from @sangui/tokens */
   --color-paper: var(--ds-color-paper);
   --color-paper-deep: var(--ds-color-paper-deep);
   --color-ink: var(--ds-color-ink);
@@ -67,7 +67,7 @@
   }
 }
 
-/* semantic tokens — flip under .dark (values from @doodle-ds/tokens) */
+/* semantic tokens — flip under .dark (values from @sangui/tokens) */
 @theme inline {
   --color-bg: var(--ds-bg);
   --color-bg-deep: var(--ds-bg-deep);

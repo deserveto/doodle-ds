@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Badge, Button } from "@doodle-ds/ui";
-import { MoonIcon, SunIcon } from "@doodle-ds/icons";
+import { Badge, Button } from "@sangui/ui";
+import { MoonIcon, SunIcon } from "@sangui/icons";
 import { Components } from "./docs/sections/Components";
 import { Foundations } from "./docs/sections/Foundations";
 import {

@@ -1,5 +1,5 @@
 {
-  "name": "@doodle-ds/docs",
+  "name": "@sangui/docs",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,9 +10,9 @@
     "typecheck": "tsc -b --noEmit"
   },
   "dependencies": {
-    "@doodle-ds/icons": "^0.1.0",
-    "@doodle-ds/tokens": "^0.1.0",
-    "@doodle-ds/ui": "^0.1.0",
+    "@sangui/icons": "^0.1.0",
+    "@sangui/tokens": "^0.1.0",
+    "@sangui/ui": "^0.1.0",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"

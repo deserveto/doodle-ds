@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { ChevronDownIcon } from "@doodle-ds/icons";
+import { ChevronDownIcon } from "@sangui/icons";
 import { cn } from "../lib/cn";
 
 export type SelectProps = ComponentProps<"select">;

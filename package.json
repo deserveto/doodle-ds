@@ -11,8 +11,8 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build -w @doodle-ds/tokens && npm run build -w @doodle-ds/icons && npm run build -w @doodle-ds/ui && npm run build -w @doodle-ds/docs",
-    "dev": "npm run dev -w @doodle-ds/docs",
+    "build": "npm run build -w @sangui/tokens && npm run build -w @sangui/icons && npm run build -w @sangui/ui && npm run build -w @sangui/docs",
+    "dev": "npm run dev -w @sangui/docs",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
-import { CheckIcon } from "@doodle-ds/icons";
+import { CheckIcon } from "@sangui/icons";
 import { cn } from "../lib/cn";
 
 export interface CheckboxProps extends ComponentProps<"input"> {

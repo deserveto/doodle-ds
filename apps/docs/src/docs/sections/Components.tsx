@@ -43,7 +43,7 @@ import {
   UploadIcon,
   UserIcon,
   XCircleIcon,
-} from "@doodle-ds/icons";
+} from "@sangui/icons";
 import {
   ArrowRight,
   Bell,
@@ -111,7 +111,7 @@ import {
   Tag,
   Textarea,
   Tooltip,
-} from "@doodle-ds/ui";
+} from "@sangui/ui";
 import { DoodleArrow, DoodleStar, Section, Demo } from "../decor";
 
 export function Components() {
