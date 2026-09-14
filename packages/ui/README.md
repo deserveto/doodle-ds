@@ -4,6 +4,8 @@ Playful neo-brutalist React 19 components with a Tailwind CSS v4 theme.
 
 ## Install and import
 
+`@sangisalarp/ui` is a library: installing it adds dependencies but never scaffolds an app, creates source files, or adds a visible screen. For a fresh folder, use the [`create-doodle-app` CLI quick start](../create-doodle-app/README.md); for manual setup, start with the [root quick start](../../README.md#manual-install).
+
 ```sh
 npm install @sangisalarp/tokens @sangisalarp/icons @sangisalarp/ui
 ```

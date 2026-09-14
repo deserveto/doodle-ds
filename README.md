@@ -15,10 +15,70 @@ Playful neo-brutalist React design system. Tokens, Scribbles icons, UI component
 
 ## Install
 
-In a React 19 application:
+This is a component library, not an app generator. Running `npm install` only adds packages to `node_modules` and `package.json`; it does not create `src/`, CSS files, or a visible screen. Start with an existing React app, or scaffold one first.
+
+### From an empty folder (recommended)
+
+Use the public CLI for a ready-to-run Doodle app:
 
 ```sh
-npm install @sangisalarp/tokens @sangisalarp/icons @sangisalarp/ui
+npm create doodle-app@latest my-app
+cd my-app
+npm run dev
+```
+
+The CLI creates the Vite + React starter, configures Tailwind CSS v4, installs the aligned Doodle DS packages, and includes the design-system guidance in `DESIGN_SYSTEM.md`. See the [create-doodle-app quick start](packages/create-doodle-app/README.md) for options and troubleshooting.
+
+### Manual install
+
+For a hand-configured project, or when adding Doodle DS to an existing app, use the package install path below.
+
+```sh
+npm create vite@latest my-app -- --template react-ts
+cd my-app
+npm install
+npm install @sangisalarp/tokens @sangisalarp/icons @sangisalarp/ui tailwindcss@^4
+```
+
+Then complete the three app-side steps below:
+
+1. Create `src/index.css` with the package stylesheet imports.
+2. Import `./index.css` once from `src/main.tsx`.
+3. Import a component from `@sangisalarp/ui` and render it from `App.tsx`.
+
+Copy-paste starter files:
+
+```css
+/* src/index.css */
+@import "@sangisalarp/tokens/css/tokens.css";
+@import "@sangisalarp/ui/styles.css";
+```
+
+```tsx
+// src/App.tsx
+import { Button, Card, CardContent } from "@sangisalarp/ui";
+import { SearchIcon } from "@sangisalarp/icons";
+
+export default function App() {
+  return (
+    <main className="min-h-screen bg-bg p-8 text-fg">
+      <Card tone="sun">
+        <CardContent className="flex items-center gap-3">
+          <SearchIcon className="h-5 w-5" aria-hidden="true" />
+          <Button type="button">start doodling</Button>
+        </CardContent>
+      </Card>
+    </main>
+  );
+}
+```
+
+Vite already imports `src/index.css` from its generated `src/main.tsx`. If your starter does not, add `import "./index.css";` to the entrypoint, then run `npm run dev` and open the printed local URL.
+
+For an existing React 19 application, skip the scaffold commands and run the package install directly:
+
+```sh
+npm install @sangisalarp/tokens @sangisalarp/icons @sangisalarp/ui tailwindcss@^4
 ```
 
 `@sangisalarp/ui` has peer dependencies on `react`, `react-dom`, and Tailwind CSS 4. Install the peers when they are not already in your app.
