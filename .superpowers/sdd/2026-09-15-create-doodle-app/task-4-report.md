@@ -54,6 +54,20 @@ Review-fix verification:
 - `npm run build -w create-doodle-app`: passed; tsup emitted `dist/index.js`.
 - `node dist/index.js --help` and `node dist/index.js --version` from the package directory: passed.
 
+## Entrypoint symlink fix
+
+- Replaced the lexical `argv[1]` comparison with a safe `realpathSync.native` comparison, including a lexical fallback for missing paths and case-insensitive matching on Windows.
+- Exported the guard as `isMainEntry` for focused regression coverage. A symlinked executable path is now recognized as the main entry, while missing/undefined paths safely return false.
+
+Entrypoint-fix verification:
+
+- `npx vitest run packages/create-doodle-app/src/run.test.ts`: 14 tests passed (including symlink and missing-path checks).
+- `npm test`: 8 files passed, 47 tests passed.
+- `npm run typecheck -w create-doodle-app`: passed.
+- `npx eslint packages/create-doodle-app/src/cli.ts packages/create-doodle-app/src/index.ts packages/create-doodle-app/src/run.test.ts`: passed.
+- `npm run build -w create-doodle-app`: passed; tsup emitted `dist/index.js`.
+- `node dist/index.js --help` and `node dist/index.js --version` from the package directory: passed.
+
 ## Concerns
 
 - The generated app still uses the template’s package metadata/version contract from Task 3; this CLI does not query package registries or perform independent “latest” lookups.

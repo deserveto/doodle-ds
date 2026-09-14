@@ -1,5 +1,9 @@
+import { mkdtemp, rm, symlink } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { openFolder, run, type CliDependencies } from "./cli";
+import { isMainEntry } from "./index";
 import type { CommandSpec, GeneratedFile } from "./types";
 
 const destination = "C:\\workspace\\my-app";
@@ -243,5 +247,31 @@ describe("openFolder", () => {
     listeners.error?.(new Error("Explorer is unavailable"));
 
     await expect(pending).rejects.toThrow("Explorer is unavailable");
+  });
+});
+
+describe("CLI entrypoint", () => {
+  it("handles a missing argv entry safely", () => {
+    expect(isMainEntry(undefined)).toBe(false);
+    expect(isMainEntry(resolve("packages/create-doodle-app/dist/does-not-exist.js"))).toBe(false);
+  });
+
+  it("recognizes a symlinked executable path as the main entry", async ({ skip }) => {
+    const directory = await mkdtemp(join(tmpdir(), "create-doodle-app-entry-"));
+    const target = resolve("packages/create-doodle-app/src/index.ts");
+    const link = join(directory, "create-doodle-app");
+
+    try {
+      try {
+        await symlink(target, link, "file");
+      } catch {
+        skip("symlink creation is unavailable on this platform");
+        return;
+      }
+
+      expect(isMainEntry(link)).toBe(true);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
   });
 });
