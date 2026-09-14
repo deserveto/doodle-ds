@@ -12,7 +12,8 @@ import { fileURLToPath } from "node:url";
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const svgDir = join(root, "assets", "svg");
 const iconsDir = join(root, "src", "icons");
-const distSvg = join(root, "dist", "svg");
+const distDir = join(root, "dist");
+const distSvg = join(distDir, "svg");
 
 const pascal = (name) =>
   name
@@ -21,6 +22,7 @@ const pascal = (name) =>
     .join("") + "Icon";
 
 rmSync(iconsDir, { recursive: true, force: true });
+rmSync(distDir, { recursive: true, force: true });
 mkdirSync(iconsDir, { recursive: true });
 mkdirSync(distSvg, { recursive: true });
 

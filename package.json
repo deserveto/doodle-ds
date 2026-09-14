@@ -22,7 +22,8 @@
     "check": "npm run lint && npm test && npm run audit:production && npm run build && npm run typecheck",
     "verify": "npm run check && npm run test:e2e",
     "changeset": "changeset",
-    "version-packages": "changeset version"
+    "version-packages": "changeset version",
+    "release": "changeset publish"
   },
   "repository": {
     "type": "git",
