@@ -1,0 +1,38 @@
+{
+  "name": "create-doodle-app",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Scaffold a Vite + React app with Doodle DS",
+  "bin": {
+    "create-doodle-app": "./dist/index.js"
+  },
+  "doodleCoreVersion": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deserveto/doodle-ds.git",
+    "directory": "packages/create-doodle-app"
+  },
+  "bugs": {
+    "url": "https://github.com/deserveto/doodle-ds/issues"
+  },
+  "homepage": "https://github.com/deserveto/doodle-ds#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0",
+    "typescript": "~5.8.3"
+  }
+}
