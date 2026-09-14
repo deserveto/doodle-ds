@@ -30,6 +30,20 @@ describe("create-doodle-app package metadata", () => {
     expect(metadata.doodleCoreVersion).toBe("0.1.0");
     expect(publicPackages).toEqual([metadata.doodleCoreVersion, metadata.doodleCoreVersion, metadata.doodleCoreVersion]);
   });
+
+  it("builds from the root and before direct packaging", async () => {
+    const metadata = JSON.parse(await readFile(packagePath, "utf8")) as {
+      files?: string[];
+      scripts?: Record<string, string>;
+    };
+    const rootPackage = JSON.parse(
+      await readFile(resolve(import.meta.dirname, "../../../package.json"), "utf8"),
+    ) as { scripts?: Record<string, string> };
+
+    expect(rootPackage.scripts?.build).toContain("npm run build -w create-doodle-app");
+    expect(metadata.scripts?.prepack).toBe("npm run build");
+    expect(metadata.files).toContain("dist");
+  });
 });
 
 describe("CLI shared types", () => {

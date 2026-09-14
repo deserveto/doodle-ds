@@ -26,3 +26,12 @@ The first opt-in run exposed the default Vitest 5-second timeout for a real npm 
 - `tests/create-doodle-app.integration.test.ts`
 - `.changeset/doodle-app-cli.md`
 - `.superpowers/sdd/2026-09-15-create-doodle-app/task-5-report.md`
+
+## Packaging follow-up
+
+The release review identified that the root build did not build `create-doodle-app`, while the package publishes only `dist`. The follow-up now includes `npm run build -w create-doodle-app` in the root build chain and adds a `prepack` script that rebuilds `dist` for direct `npm pack` or publish workflows. The metadata test asserts both lifecycle/build wiring and the published `dist` directory.
+
+- `npm run build -w create-doodle-app` — passed.
+- `npm pack --dry-run --workspace create-doodle-app` — passed; tarball contents included `dist/index.js`, `README.md`, and `package.json`.
+- `npm run build` — passed, with the CLI build occurring before docs.
+- `npm run check` — passed: 48 tests plus one skipped integration test, audit clean, full build, and typecheck.
