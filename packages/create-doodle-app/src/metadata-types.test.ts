@@ -27,8 +27,12 @@ describe("create-doodle-app package metadata", () => {
     expect(metadata.version).toMatch(/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
     expect(metadata.type).toBe("module");
     expect(metadata.bin).toEqual({ "create-doodle-app": "./dist/index.js" });
-    expect(metadata.doodleCoreVersion).toBe("0.1.0");
-    expect(publicPackages).toEqual([metadata.doodleCoreVersion, metadata.doodleCoreVersion, metadata.doodleCoreVersion]);
+    expect(metadata.doodleCoreVersion).toMatch(/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
+    expect(publicPackages).toEqual([
+      metadata.doodleCoreVersion,
+      metadata.doodleCoreVersion,
+      metadata.doodleCoreVersion,
+    ]);
   });
 
   it("builds from the root and before direct packaging", async () => {
@@ -41,6 +45,9 @@ describe("create-doodle-app package metadata", () => {
     ) as { scripts?: Record<string, string> };
 
     expect(rootPackage.scripts?.build).toContain("npm run build -w create-doodle-app");
+    expect(rootPackage.scripts?.["version-packages"]).toContain(
+      "sync-doodle-core-version.mjs",
+    );
     expect(metadata.scripts?.prepack).toBe("npm run build");
     expect(metadata.files).toContain("dist");
   });

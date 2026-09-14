@@ -22,7 +22,7 @@
     "check": "npm run lint && npm run build && npm test && npm run audit:production && npm run typecheck",
     "verify": "npm run check && npm run test:e2e",
     "changeset": "changeset",
-    "version-packages": "changeset version",
+    "version-packages": "changeset version && node scripts/sync-doodle-core-version.mjs",
     "release": "changeset publish"
   },
   "repository": {
