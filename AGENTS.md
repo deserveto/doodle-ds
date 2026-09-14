@@ -21,10 +21,12 @@ npm run dev            # docs dev server (vite)
 npm run typecheck      # tsc in every workspace
 npm run check          # lint, typecheck, unit tests, production audit, build
 npm run verify         # check plus Playwright browser smoke tests
-npx changeset          # versioning flow (ui + tokens versioned; docs ignored)
+npx changeset          # versioning flow (public tokens/icons/ui versioned; private docs ignored)
 ```
 
 Verification = `npm run check` plus `npm run test:e2e`; browser tests use the built docs site through `vite preview`.
+
+The release workflow (`.github/workflows/release.yml`) runs on pushes to `main` only when the `DOODLE_DS_RELEASE_ENABLED` repository variable is `true`. It needs the `NPM_TOKEN` repository secret, GitHub Actions write permissions, and permission to create/approve pull requests. A changeset creates the version pull request; merging that PR publishes the changed public packages to the `@sangisalarp` scope.
 
 ## Hard-won gotchas
 
