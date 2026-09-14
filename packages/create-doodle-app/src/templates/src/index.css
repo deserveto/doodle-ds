@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@import "@sangisalarp/tokens/css/tokens.css";
+@import "@sangisalarp/ui/theme.css";
+
+@source "../node_modules/@sangisalarp/ui/dist";
+
+body {
+  margin: 0;
+}

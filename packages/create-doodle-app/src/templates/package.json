@@ -1,0 +1,27 @@
+{
+  "name": "__PROJECT_NAME__",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@sangisalarp/icons": "__DOODLE_CORE_VERSION__",
+    "@sangisalarp/tokens": "__DOODLE_CORE_VERSION__",
+    "@sangisalarp/ui": "__DOODLE_CORE_VERSION__",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "@types/react": "^19.1.14",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.3",
+    "tailwindcss": "^4.1.13",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.6"
+  }
+}
