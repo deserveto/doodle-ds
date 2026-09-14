@@ -1,7 +1,8 @@
-import { readdir, realpath, stat } from "node:fs/promises";
+import { lstat, readdir, realpath, stat } from "node:fs/promises";
 import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 
 export interface DirectoryFsApi {
+  lstat(path: string): Promise<{ isSymbolicLink(): boolean }>;
   stat(path: string): Promise<{ isDirectory(): boolean }>;
   readdir(path: string): Promise<string[]>;
   realpath(path: string): Promise<string>;
@@ -18,6 +19,9 @@ export interface DirectoryValidationOptions {
 }
 
 const defaultFsApi: DirectoryFsApi = {
+  async lstat(path) {
+    return lstat(path);
+  },
   async stat(path) {
     return stat(path);
   },
@@ -85,6 +89,36 @@ function isWithinDirectory(directory: string, candidate: string): boolean {
   );
 }
 
+async function rejectSymlinkComponents(
+  path: string,
+  fsApi: DirectoryFsApi,
+): Promise<void> {
+  let currentPath = resolve(path);
+
+  while (true) {
+    let isSymbolicLink = false;
+    try {
+      isSymbolicLink = (await fsApi.lstat(currentPath)).isSymbolicLink();
+    } catch (error) {
+      if (!isMissingPath(error)) {
+        throw error;
+      }
+    }
+
+    if (isSymbolicLink) {
+      throw new Error(
+        `The project directory cannot contain symbolic links or junctions (found "${currentPath}").`,
+      );
+    }
+
+    const parentPath = dirname(currentPath);
+    if (parentPath === currentPath) {
+      return;
+    }
+    currentPath = parentPath;
+  }
+}
+
 export async function validateProjectDirectory(
   input: string,
   cwd: string,
@@ -107,6 +141,7 @@ export async function validateProjectDirectory(
     throw new Error("The project directory must be inside the current working directory.");
   }
 
+  await rejectSymlinkComponents(projectDirectory, fsApi);
   const canonicalWorkingDirectory = await canonicalizePath(workingDirectory, fsApi);
   const canonicalProjectDirectory = await canonicalizePath(projectDirectory, fsApi);
   if (!isWithinDirectory(canonicalWorkingDirectory, canonicalProjectDirectory)) {

@@ -10,8 +10,18 @@ const fixtureCwd = resolve("validation-fixture");
 function fakeFs(
   entries: Record<string, { kind: "directory"; entries: string[] } | { kind: "file" }> = {},
   realpaths: Record<string, string> = {},
+  symlinks: string[] = [],
 ): DirectoryFsApi {
   return {
+    async lstat(path) {
+      if (symlinks.includes(path)) {
+        return { isSymbolicLink: () => true };
+      }
+      if (entries[path]) {
+        return { isSymbolicLink: () => false };
+      }
+      throw Object.assign(new Error(`ENOENT: ${path}`), { code: "ENOENT" });
+    },
     async stat(path) {
       const entry = entries[path];
       if (!entry) {
@@ -109,6 +119,25 @@ describe("validateProjectDirectory", () => {
 
     await expect(validateProjectDirectory(destination, cwd, fsApi)).rejects.toThrow(
       /inside the current working directory/i,
+    );
+  });
+
+  it("rejects a dangling symlink destination before treating it as new", async () => {
+    const destination = join(cwd, "dangling-app");
+    const fsApi = fakeFs({}, {}, [destination]);
+
+    await expect(validateProjectDirectory("dangling-app", cwd, fsApi)).rejects.toThrow(
+      /symbolic link|junction|symlink/i,
+    );
+  });
+
+  it("rejects a new destination beneath a dangling symlink parent", async () => {
+    const parent = join(cwd, "dangling-parent");
+    const destination = join(parent, "my-app");
+    const fsApi = fakeFs({}, {}, [parent]);
+
+    await expect(validateProjectDirectory(destination, cwd, fsApi)).rejects.toThrow(
+      /symbolic link|junction|symlink/i,
     );
   });
 

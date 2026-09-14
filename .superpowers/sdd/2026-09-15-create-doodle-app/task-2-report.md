@@ -58,3 +58,12 @@ Verification after the fix:
 - Focused validation/install tests (RED before implementation: 2 symlink-escape failures; GREEN after implementation): 2 files passed, 18 tests passed.
 - `npx eslint packages/create-doodle-app/src/validation.ts packages/create-doodle-app/src/validation.test.ts packages/create-doodle-app/src/install.ts packages/create-doodle-app/src/install.test.ts`: passed.
 - `npm run typecheck -w create-doodle-app`: passed.
+
+## Follow-up fix — dangling link rejection
+
+Review found that dangling destination or parent links could still be mistaken for missing paths because `realpath` returns `ENOENT`. The validator now walks every destination path component with injected `lstat` and rejects symbolic links or Windows junctions before canonicalization, including dangling links.
+
+Added regression coverage for dangling destination and dangling parent links. Verification for this round:
+
+- RED before implementation: 2 dangling-link tests failed because validation resolved successfully.
+- GREEN after implementation: `npx vitest run packages/create-doodle-app/src/validation.test.ts` — 1 file passed, 18 tests passed.
