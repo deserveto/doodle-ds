@@ -1,6 +1,6 @@
 {
   "name": "@sangisalarp/tokens",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "license": "MIT",
   "description": "Doodle DS design tokens — DTCG source built to CSS variables",

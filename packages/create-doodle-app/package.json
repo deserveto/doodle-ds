@@ -1,13 +1,13 @@
 {
   "name": "create-doodle-app",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "type": "module",
   "license": "MIT",
   "description": "Scaffold a Vite + React app with Doodle DS",
   "bin": {
     "create-doodle-app": "./dist/index.js"
   },
-  "doodleCoreVersion": "0.1.1",
+  "doodleCoreVersion": "0.1.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/deserveto/doodle-ds.git",

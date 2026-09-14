@@ -1,5 +1,11 @@
 # @sangisalarp/icons
 
+## 0.1.2
+
+### Patch Changes
+
+- Align the core package release with the fixed Doodle app starter.
+
 ## 0.1.1
 
 ### Patch Changes

@@ -68,10 +68,14 @@ createRoot(document.getElementById("root")!).render(
 );
 `;
 
-const appTsx = `import { SearchIcon } from "@sangisalarp/icons";
+const appTsx = `import { useState } from "react";
+import { SearchIcon } from "@sangisalarp/icons";
 import { Button, Card, CardContent } from "@sangisalarp/ui";
 
 export default function App() {
+  const [isDoodling, setIsDoodling] = useState(false);
+  const [showIdeas, setShowIdeas] = useState(false);
+
   return (
     <main className="min-h-screen bg-bg bg-noise px-6 py-12 text-fg sm:px-10">
       <div className="mx-auto flex max-w-5xl flex-col gap-10">
@@ -82,22 +86,65 @@ export default function App() {
               Your Doodle app
             </h1>
           </div>
-          <Button variant="sun" size="lg">Start doodling</Button>
+          <Button
+            variant="sun"
+            size="lg"
+            onClick={() => setIsDoodling((active) => !active)}
+            aria-expanded={isDoodling}
+            aria-controls="doodle-canvas"
+          >
+            {isDoodling ? "Close canvas" : "Start doodling"}
+          </Button>
         </header>
 
-        <Card tape tone="sun" className="max-w-2xl" tilt={-1}>
-          <CardContent className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="mb-2 font-display text-2xl font-bold">A tiny canvas awaits.</p>
-              <p className="max-w-md text-fg-mute">
-                Edit <code className="font-mono">src/App.tsx</code> and make this
-                starter screen yours.
-              </p>
+        <Card id="doodle-canvas" tape tone="sun" className="max-w-2xl" tilt={-1}>
+          <CardContent className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="mb-2 font-display text-2xl font-bold">
+                  {isDoodling ? "Your canvas is open." : "A tiny canvas awaits."}
+                </p>
+                <p className="max-w-md text-fg-mute">
+                  {isDoodling
+                    ? "Write down a first idea, then shape it into your own Doodle app."
+                    : "Edit src/App.tsx or start the tiny canvas to make this starter screen yours."}
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                className="shrink-0"
+                onClick={() => setShowIdeas((visible) => !visible)}
+                aria-expanded={showIdeas}
+                aria-controls="doodle-ideas"
+              >
+                <SearchIcon aria-hidden width={18} height={18} />
+                {showIdeas ? "Hide ideas" : "Explore"}
+              </Button>
             </div>
-            <Button variant="outline" className="shrink-0">
-              <SearchIcon aria-hidden width={18} height={18} />
-              Explore
-            </Button>
+
+            {isDoodling && (
+              <div className="rounded-wobbly-sm border-2 border-line bg-surface p-4 shadow-pop-xs">
+                <label className="font-display font-bold" htmlFor="doodle-notes">
+                  Your first note
+                </label>
+                <textarea
+                  id="doodle-notes"
+                  className="mt-3 min-h-24 w-full resize-y rounded-wobbly-sm border-2 border-line bg-bg p-3 text-fg outline-none focus-visible:ring-2 focus-visible:ring-accent-sky"
+                  placeholder="A bright idea starts here..."
+                />
+              </div>
+            )}
+
+            {showIdeas && (
+              <div id="doodle-ideas" className="rounded-wobbly-sm border-2 border-line bg-bg-deep p-4">
+                <p className="font-display font-bold">Try one of these:</p>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-fg-mute">
+                  <li>Swap the starter copy for your product story.</li>
+                  <li>Give the card a new semantic accent tone.</li>
+                  <li>Add a component from @sangisalarp/ui.</li>
+                </ul>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>

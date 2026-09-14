@@ -10,9 +10,9 @@
     "typecheck": "tsc -b --noEmit"
   },
   "dependencies": {
-    "@sangisalarp/icons": "^0.1.1",
-    "@sangisalarp/tokens": "^0.1.1",
-    "@sangisalarp/ui": "^0.1.1",
+    "@sangisalarp/icons": "^0.1.2",
+    "@sangisalarp/tokens": "^0.1.2",
+    "@sangisalarp/ui": "^0.1.2",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"

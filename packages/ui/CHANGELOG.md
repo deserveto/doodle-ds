@@ -1,5 +1,11 @@
 # @sangisalarp/ui
 
+## 0.1.2
+
+### Patch Changes
+
+- Keep the published Tailwind theme source-compatible with consumer builds and make the generated starter controls interactive.
+
 ## 0.1.1
 
 ### Patch Changes

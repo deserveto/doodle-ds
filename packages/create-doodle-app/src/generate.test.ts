@@ -51,6 +51,11 @@ describe("getTemplateFiles", () => {
     expect(app).toContain("CardContent");
     expect(app).toContain('from "@sangisalarp/icons"');
     expect(app).toContain("SearchIcon");
+    expect(app).toContain('import { useState } from "react";');
+    expect(app).toContain("setIsDoodling");
+    expect(app).toContain("setShowIdeas");
+    expect(app).toContain("aria-expanded={isDoodling}");
+    expect(app).toContain('id="doodle-canvas"');
 
     const css = byPath.get("src/index.css") ?? "";
     expect(css).toContain('@import "tailwindcss";');
