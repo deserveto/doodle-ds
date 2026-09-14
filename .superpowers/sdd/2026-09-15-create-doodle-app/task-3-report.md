@@ -44,5 +44,17 @@ No existing README or unrelated documentation file was changed by this task.
 
 ## Concerns
 
-- The source template fixtures are kept under the package `src/templates` path required by the task, while `template.ts` embeds the runtime-safe strings so the published `dist` package does not depend on source-relative file reads.
 - The generated file list intentionally follows the task’s declared paths and does not add a `tsconfig.json`; therefore the generated `build` script is Vite-only. A future task can add a generated TypeScript project config if the scaffold contract expands.
+
+## Review fix round
+
+- Removed the unused, divergent `src/templates` fixture tree; `template.ts` is now the sole runtime source of generated contents.
+- Corrected the generated README to describe `npm run build` accurately as a Vite production build.
+- Added injectable `lstat` checks for every existing project/file path component, rejecting symlinks and Windows junctions before any mkdir/write; added a linked `src` regression test.
+- Removed the raw-hex HTML theme-color metadata.
+
+Fix verification:
+
+- `npx vitest run packages/create-doodle-app/src/generate.test.ts`: 1 file passed, 3 tests passed.
+- `npm run typecheck -w create-doodle-app`: passed.
+- `npx eslint packages/create-doodle-app/src/template.ts packages/create-doodle-app/src/generate.ts packages/create-doodle-app/src/generate.test.ts`: passed with no output.

@@ -47,7 +47,6 @@ const indexHtml = `<!doctype html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#fff8e7" />
     <title>Doodle app</title>
   </head>
   <body>
@@ -131,7 +130,7 @@ This project was created with [Doodle DS](https://github.com/deserveto/doodle-ds
 ## Commands
 
 - \`npm run dev\` — start the Vite development server.
-- \`npm run build\` — type-check and build for production.
+- \`npm run build\` — build the production bundle with Vite.
 - \`npm run preview\` — preview the production build locally.
 
 ## Existing app

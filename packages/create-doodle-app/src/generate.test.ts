@@ -7,6 +7,9 @@ const projectDirectory = resolve("generation-fixture/my-doodle-app");
 
 function fakeFs(writes: Record<string, string>, directories: Set<string>): TemplateFsApi {
   return {
+    async lstat() {
+      return { isSymbolicLink: () => false };
+    },
     async mkdir(path) {
       directories.add(path);
     },
@@ -58,6 +61,8 @@ describe("getTemplateFiles", () => {
     const main = byPath.get("src/main.tsx") ?? "";
     expect(main.match(/import [^;]*index\.css/g)).toHaveLength(1);
     expect(app).not.toContain("index.css");
+    expect(byPath.get("README.md")).not.toContain("type-check");
+    expect(byPath.get("index.html")).not.toMatch(/#[0-9a-f]{3,8}/i);
   });
 });
 
@@ -74,5 +79,26 @@ describe("writeTemplate", () => {
     expect(writes[join(projectDirectory, "src", "App.tsx")]).toContain("SearchIcon");
     expect(Object.keys(writes)).toHaveLength(files.length + 1);
     expect(directories).toContain(dirname(join(projectDirectory, "src", "App.tsx")));
+  });
+
+  it("refuses to write through a pre-existing linked source directory", async () => {
+    const linkedSource = join(projectDirectory, "src");
+    const writes: Record<string, string> = {};
+    const directories = new Set<string>();
+    const fsApi = {
+      ...fakeFs(writes, directories),
+      async lstat(path: string) {
+        return { isSymbolicLink: () => path === linkedSource };
+      },
+    } as TemplateFsApi;
+
+    await expect(
+      writeTemplate(
+        [{ path: "src/App.tsx", contents: "export default function App() {}\n" }],
+        projectDirectory,
+        fsApi,
+      ),
+    ).rejects.toThrow(/symbolic link|junction/i);
+    expect(writes).toEqual({});
   });
 });
