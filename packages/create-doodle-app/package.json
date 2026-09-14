@@ -24,7 +24,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup src/index.ts --format esm --no-dts --clean",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
