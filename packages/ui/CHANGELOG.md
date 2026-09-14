@@ -1,13 +1,9 @@
-# create-doodle-app
+# @sangisalarp/ui
 
-## 0.2.1
+## 0.1.1
 
 ### Patch Changes
 
 - 8bcb83b: Improve dark-mode contrast across semantic tokens and UI components, including readable foregrounds on bright accent surfaces. Keep the published Doodle core packages and generated app template aligned.
-
-## 0.2.0
-
-### Minor Changes
-
-- da0cf1f: Add the public `create-doodle-app` CLI for scaffolding a ready-to-run Doodle DS Vite + React app.
+- Updated dependencies [8bcb83b]
+  - @sangisalarp/icons@0.1.1
