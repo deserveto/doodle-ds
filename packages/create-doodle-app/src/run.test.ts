@@ -14,6 +14,7 @@ function dependencies(overrides: Partial<CliDependencies> = {}): TestDependencie
   const output: string[] = [];
   return {
     cwd: "C:\\workspace",
+    platform: "win32",
     packageMetadata: { doodleCoreVersion: "9.9.9", version: "0.1.0" },
     output: {
       log: (message) => output.push(message),
@@ -192,6 +193,21 @@ describe("run", () => {
 
     await expect(run(["nested folder\\my-app", "--skip-install"], deps)).resolves.toBe(0);
     expect(deps.outputLog.join("\n")).toContain('cd "nested folder\\my-app"');
+  });
+
+  it("keeps POSIX next steps copy-pastable", async () => {
+    const deps = dependencies({
+      cwd: "/workspace",
+      platform: "linux",
+      validateProjectDirectory: async () => ({
+        projectDirectory: "/workspace/nested folder/my-app",
+        projectName: "my-app",
+        existingEntries: [],
+      }),
+    });
+
+    await expect(run(["nested folder/my-app", "--skip-install"], deps)).resolves.toBe(0);
+    expect(deps.outputLog.join("\n")).toContain("cd 'nested folder/my-app'");
   });
 
   it("never invokes npm when --skip-install is set", async () => {

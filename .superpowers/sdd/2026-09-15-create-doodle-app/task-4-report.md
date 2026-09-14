@@ -68,6 +68,18 @@ Entrypoint-fix verification:
 - `npm run build -w create-doodle-app`: passed; tsup emitted `dist/index.js`.
 - `node dist/index.js --help` and `node dist/index.js --version` from the package directory: passed.
 
+## Cross-platform next-step fix
+
+- Reproduced the Ubuntu failure where Windows-style fixture paths were resolved with host POSIX path semantics, producing `../C:\\workspace\\...` output.
+- `nextSteps` now selects `path.win32` for Windows output and `path.posix` for POSIX output; test dependencies explicitly declare `platform: "win32"` for Windows fixtures.
+- Added a POSIX nested-path regression to ensure paths with spaces use shell-safe single quotes while Windows paths use escaped double quotes.
+
+Cross-platform fix verification:
+
+- `npx vitest run packages/create-doodle-app/src/run.test.ts`: 15 tests passed.
+- `npm run check`: passed (lint, 49 tests passed/1 skipped, production audit with 0 vulnerabilities, all workspace builds, and all workspace typechecks).
+- `npm run build -w create-doodle-app`: passed; tsup emitted `dist/index.js`.
+
 ## Concerns
 
 - The generated app still uses the template’s package metadata/version contract from Task 3; this CLI does not query package registries or perform independent “latest” lookups.

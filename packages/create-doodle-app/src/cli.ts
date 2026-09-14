@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
-import { relative, resolve } from "node:path";
+import { posix, resolve, win32 } from "node:path";
 import {
   cancel as clackCancel,
   intro as clackIntro,
@@ -208,7 +208,9 @@ function quotePath(path: string, platform: NodeJS.Platform): string {
 }
 
 function nextSteps(cwd: string, projectDirectory: string, platform: NodeJS.Platform): string {
-  const destination = relative(resolve(cwd), resolve(projectDirectory)) || ".";
+  const destination = platform === "win32"
+    ? win32.relative(win32.resolve(cwd), win32.resolve(projectDirectory)) || "."
+    : posix.relative(posix.resolve(cwd), posix.resolve(projectDirectory)) || ".";
   return `Next steps:\n  cd ${quotePath(destination, platform)}\n  npm run dev`;
 }
 
