@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { run, type CliDependencies } from "./cli";
+import { openFolder, run, type CliDependencies } from "./cli";
 import type { CommandSpec, GeneratedFile } from "./types";
 
 const destination = "C:\\workspace\\my-app";
@@ -60,6 +60,33 @@ describe("run", () => {
     expect(installCommands[0]).toMatchObject({ command: "npm", args: ["install"] });
     expect(deps.outputLog.join("\n")).toContain("cd my-doodle-app");
     expect(deps.outputLog.join("\n")).toContain("npm run dev");
+  });
+
+  it("prints help without prompting or validating a destination", async () => {
+    let validations = 0;
+    const deps = dependencies({
+      validateProjectDirectory: async () => {
+        validations += 1;
+        throw new Error("should not validate help");
+      },
+    });
+
+    await expect(run(["--help"], deps)).resolves.toBe(0);
+    expect(validations).toBe(0);
+    expect(deps.outputLog.join("\n")).toContain("Usage: create-doodle-app");
+  });
+
+  it("prints the package version without generating an app", async () => {
+    let writes = 0;
+    const deps = dependencies({
+      writeTemplate: async () => {
+        writes += 1;
+      },
+    });
+
+    await expect(run(["--version"], deps)).resolves.toBe(0);
+    expect(writes).toBe(0);
+    expect(deps.outputLog).toContain("0.1.0");
   });
 
   it("prompts for a missing project directory and exits cleanly when cancelled", async () => {
@@ -139,6 +166,30 @@ describe("run", () => {
     expect(deps.outputLog.join("\n")).toMatch(/created|ready/i);
   });
 
+  it("warns but keeps a successful exit when opening the folder fails", async () => {
+    const deps = dependencies({
+      openFolder: async () => {
+        throw new Error("Explorer is unavailable");
+      },
+    });
+
+    await expect(run(["my-app", "--skip-install", "--open"], deps)).resolves.toBe(0);
+    expect(deps.outputLog.join("\n")).toMatch(/could not open.*explorer is unavailable/i);
+  });
+
+  it("quotes nested paths with spaces in the exact next steps", async () => {
+    const deps = dependencies({
+      validateProjectDirectory: async () => ({
+        projectDirectory: "C:\\workspace\\nested folder\\my-app",
+        projectName: "my-app",
+        existingEntries: [],
+      }),
+    });
+
+    await expect(run(["nested folder\\my-app", "--skip-install"], deps)).resolves.toBe(0);
+    expect(deps.outputLog.join("\n")).toContain('cd "nested folder\\my-app"');
+  });
+
   it("never invokes npm when --skip-install is set", async () => {
     let commandCalls = 0;
     const deps = dependencies({
@@ -171,5 +222,26 @@ describe("run", () => {
     expect(commandCalls).toBe(1);
     expect(deps.outputLog.join("\n")).toMatch(/install.*failed|npm install/i);
     expect(deps.outputLog.join("\n")).toMatch(/run npm install|retry/i);
+  });
+});
+
+describe("openFolder", () => {
+  it("rejects asynchronous opener failures instead of leaking an unhandled error", async () => {
+    const listeners: Record<string, (error?: Error) => void> = {};
+    const child = {
+      once(event: string, listener: (error?: Error) => void) {
+        listeners[event] = listener;
+        return child;
+      },
+      unref() {
+        return child;
+      },
+    };
+    const spawnProcess = (() => child) as unknown as typeof import("node:child_process").spawn;
+
+    const pending = openFolder("C:\\workspace\\my-app", "win32", spawnProcess);
+    listeners.error?.(new Error("Explorer is unavailable"));
+
+    await expect(pending).rejects.toThrow("Explorer is unavailable");
   });
 });

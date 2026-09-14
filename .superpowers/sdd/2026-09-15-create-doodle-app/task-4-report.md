@@ -38,6 +38,22 @@ Updated:
 - `npm run build -w create-doodle-app`: passed; tsup emitted `dist/index.js`.
 - `node dist/index.js --help` and `node dist/index.js --version`: passed (`0.1.0`).
 
+## Review fixes
+
+- Hardened the detached folder opener with `spawn`/`error` handling. It now resolves only after the child successfully spawns and rejects startup failures so `run` can emit a recoverable warning without an unhandled process error.
+- Made generated `cd` instructions shell-safe: Windows paths with special characters use escaped double quotes, while POSIX paths use escaped single quotes; simple paths retain the concise unquoted form.
+- Updated manual-install guidance to use the three unversioned Doodle packages and documented pinning all three to one recorded `doodleCoreVersion` for reproducible installs.
+- Added focused coverage for `--help`, `--version`, opener failure, nested paths containing spaces, and asynchronous default-opener rejection.
+
+Review-fix verification:
+
+- `npx vitest run packages/create-doodle-app/src/run.test.ts`: 12 tests passed.
+- `npm test`: 8 files passed, 45 tests passed.
+- `npm run typecheck -w create-doodle-app`: passed.
+- `npx eslint packages/create-doodle-app/src/cli.ts packages/create-doodle-app/src/index.ts packages/create-doodle-app/src/run.test.ts`: passed.
+- `npm run build -w create-doodle-app`: passed; tsup emitted `dist/index.js`.
+- `node dist/index.js --help` and `node dist/index.js --version` from the package directory: passed.
+
 ## Concerns
 
 - The generated app still uses the template’s package metadata/version contract from Task 3; this CLI does not query package registries or perform independent “latest” lookups.

@@ -46,11 +46,13 @@ For a network-restricted environment, use `--skip-install`, then run `npm instal
 
 ## Existing Vite React apps
 
-Install the packages manually:
+Install the packages manually. The three Doodle packages are released together; omitting explicit versions lets npm resolve the current published set:
 
 ```sh
-npm install @sangisalarp/tokens@0.1.0 @sangisalarp/icons@0.1.0 @sangisalarp/ui@0.1.0
+npm install @sangisalarp/tokens @sangisalarp/icons @sangisalarp/ui
 npm install -D tailwindcss@^4.1.13 @tailwindcss/vite@^4.1.13
 ```
+
+For a reproducible install, pin all three Doodle packages to the same `doodleCoreVersion` recorded in the installed `create-doodle-app` package metadata.
 
 Add the React and Tailwind plugins to `vite.config.ts`, import Tailwind, Doodle token CSS, and `@sangisalarp/ui/theme.css` from your global stylesheet, and follow the component examples in the generated `src/App.tsx` and `DESIGN_SYSTEM.md`.

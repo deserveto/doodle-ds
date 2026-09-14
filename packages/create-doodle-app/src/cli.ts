@@ -92,6 +92,7 @@ export interface CliPackageMetadata {
 
 export interface CliDependencies {
   cwd?: string;
+  platform?: NodeJS.Platform;
   packageMetadata?: CliPackageMetadata;
   readPackageMetadata?: () => Promise<CliPackageMetadata>;
   validateProjectDirectory?: (
@@ -145,14 +146,29 @@ const defaultRunCommand = (command: CommandSpec): Promise<CommandResult> =>
     });
   });
 
-const defaultOpenFolder = async (projectDirectory: string): Promise<void> => {
-  const command = process.platform === "win32" ? "explorer.exe" : process.platform === "darwin" ? "open" : "xdg-open";
-  const child = spawn(command, [projectDirectory], {
-    detached: true,
-    stdio: "ignore",
+export const openFolder = (
+  projectDirectory: string,
+  platform: NodeJS.Platform = process.platform,
+  spawnProcess: typeof spawn = spawn,
+): Promise<void> =>
+  new Promise((resolveOpen, rejectOpen) => {
+    const command = platform === "win32" ? "explorer.exe" : platform === "darwin" ? "open" : "xdg-open";
+    let child;
+    try {
+      child = spawnProcess(command, [projectDirectory], {
+        detached: true,
+        stdio: "ignore",
+      });
+    } catch (error) {
+      rejectOpen(error);
+      return;
+    }
+    child.once("error", rejectOpen);
+    child.once("spawn", () => {
+      child.unref();
+      resolveOpen();
+    });
   });
-  child.unref();
-};
 
 async function readDefaultPackageMetadata(): Promise<CliPackageMetadata> {
   const packagePath = resolve(import.meta.dirname, "../package.json");
@@ -177,9 +193,23 @@ function usage(): string {
   ].join("\n");
 }
 
-function nextSteps(cwd: string, projectDirectory: string): string {
+function quotePath(path: string, platform: NodeJS.Platform): string {
+  if (platform === "win32") {
+    if (/^[A-Za-z0-9._~\\/-]+$/.test(path)) {
+      return path;
+    }
+    return `"${path.replaceAll('"', '\\"')}"`;
+  }
+
+  if (/^[A-Za-z0-9._~/-]+$/.test(path)) {
+    return path;
+  }
+  return `'${path.replaceAll("'", "'\\''")}'`;
+}
+
+function nextSteps(cwd: string, projectDirectory: string, platform: NodeJS.Platform): string {
   const destination = relative(resolve(cwd), resolve(projectDirectory)) || ".";
-  return `Next steps:\n  cd ${destination}\n  npm run dev`;
+  return `Next steps:\n  cd ${quotePath(destination, platform)}\n  npm run dev`;
 }
 
 /** Run the create-doodle-app command and return a process-compatible exit code. */
@@ -293,12 +323,12 @@ export async function run(argv: string[], dependencies: CliDependencies = {}): P
 
   if (options.open) {
     try {
-      await (dependencies.openFolder ?? defaultOpenFolder)(decision.projectDirectory);
+      await (dependencies.openFolder ?? openFolder)(decision.projectDirectory);
     } catch (error) {
       output.error(`Could not open the project folder automatically: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 
-  outro(`Created ${decision.projectName} at ${decision.projectDirectory}.\n\n${nextSteps(cwd, decision.projectDirectory)}`);
+  outro(`Created ${decision.projectName} at ${decision.projectDirectory}.\n\n${nextSteps(cwd, decision.projectDirectory, dependencies.platform ?? process.platform)}`);
   return 0;
 }

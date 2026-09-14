@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { run } from "./cli";
 
-export { parseArgs, run } from "./cli";
+export { openFolder, parseArgs, run } from "./cli";
 export type {
   CliDependencies,
   CliOutput,
