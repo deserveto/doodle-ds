@@ -23,7 +23,7 @@ No existing README or unrelated documentation file was changed by this task.
 - Parses one optional positional project directory plus `--yes`, `--skip-install`, `--force`, `--open`, `--help`, and `--version` in any order.
 - Rejects unknown flags and extra positional arguments with actionable errors.
 - Resolves destinations relative to the supplied working directory and rejects traversal outside it.
-- Rejects missing directories, invalid npm project names, existing files, and non-empty directories unless `force` is explicitly set.
+- Allows missing directories, while rejecting invalid npm project names, existing files, and non-empty directories unless `force` is explicitly set.
 - Allows new and empty destinations; forced validation reports existing entries without deleting or changing them.
 - Builds the exact `{ command: "npm", args: ["install"], cwd: projectDirectory }` command and rejects unsupported package managers.
 - Represents `--skip-install` in `CliOptions`; Task 4 orchestration can omit the install command when this flag is true.
