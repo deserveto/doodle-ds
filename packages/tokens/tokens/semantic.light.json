@@ -6,6 +6,8 @@
     "ink": { "$value": "{color.ink}", "$type": "color" },
     "ink-soft": { "$value": "{color.ink-soft}", "$type": "color" },
     "ink-mute": { "$value": "{color.ink-mute}", "$type": "color" },
+    "on-accent": { "$value": "{color.ink}", "$type": "color" },
+    "on-accent-soft": { "$value": "{color.ink-soft}", "$type": "color" },
     "line": { "$value": "{color.ink}", "$type": "color" },
     "sun": { "$value": "{color.sun}", "$type": "color" },
     "terra": { "$value": "{color.terra}", "$type": "color" },

@@ -124,7 +124,7 @@ export default function App() {
           <div className="relative hidden items-center justify-center lg:flex">
             <div className="h-56 w-44 rotate-3 rounded-full border-2 border-line bg-accent-lavender shadow-pop-lg" />
             <div className="absolute h-40 w-40 -rotate-6 rounded-full border-2 border-line bg-accent-sky shadow-pop" />
-            <div className="absolute flex h-24 w-24 items-center justify-center rounded-full border-2 border-line bg-accent font-display text-3xl font-bold shadow-pop-sm">
+            <div className="absolute flex h-24 w-24 items-center justify-center rounded-full border-2 border-line bg-accent text-on-accent font-display text-3xl font-bold shadow-pop-sm">
               ☺
             </div>
             <DoodleArrow className="absolute -bottom-2 left-6 h-24 w-32 -scale-x-100 text-fg" />

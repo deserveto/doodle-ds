@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import { createContext, useContext, type ComponentProps } from "react";
 import { cn } from "../lib/cn";
 
 export interface CardProps extends ComponentProps<"div"> {
@@ -24,6 +24,10 @@ const tapeTones = [
   "bg-accent-salmon/70",
 ] as const;
 
+type CardForeground = "surface" | "accent";
+
+const CardForegroundContext = createContext<CardForeground>("surface");
+
 export function Card({
   tape = false,
   tilt = 0,
@@ -32,36 +36,41 @@ export function Card({
   style,
   ...props
 }: CardProps) {
+  const foreground = tone === "surface" ? "surface" : "accent";
+
   return (
-    <div
-      style={{ rotate: tilt ? `${tilt}deg` : undefined, ...style }}
-      className={cn(
-        "relative rounded-cutout border-2 border-line shadow-pop",
-        tones[tone],
-        className,
-      )}
-      {...props}
-    >
-      {tape && (
-        <>
-          <span
-            aria-hidden
-            className={cn(
-              "absolute -top-3 -left-2 h-6 w-16 -rotate-12 border border-line/20",
-              tapeTones[0],
-            )}
-          />
-          <span
-            aria-hidden
-            className={cn(
-              "absolute -top-3 -right-2 h-6 w-16 rotate-6 border border-line/20",
-              tapeTones[1],
-            )}
-          />
-        </>
-      )}
-      {props.children}
-    </div>
+    <CardForegroundContext.Provider value={foreground}>
+      <div
+        style={{ rotate: tilt ? `${tilt}deg` : undefined, ...style }}
+        className={cn(
+          "relative rounded-cutout border-2 border-line shadow-pop",
+          foreground === "accent" && "text-on-accent",
+          tones[tone],
+          className,
+        )}
+        {...props}
+      >
+        {tape && (
+          <>
+            <span
+              aria-hidden
+              className={cn(
+                "absolute -top-3 -left-2 h-6 w-16 -rotate-12 border border-line/20",
+                tapeTones[0],
+              )}
+            />
+            <span
+              aria-hidden
+              className={cn(
+                "absolute -top-3 -right-2 h-6 w-16 rotate-6 border border-line/20",
+                tapeTones[1],
+              )}
+            />
+          </>
+        )}
+        {props.children}
+      </div>
+    </CardForegroundContext.Provider>
   );
 }
 
@@ -70,10 +79,13 @@ export function CardHeader({ className, ...props }: ComponentProps<"div">) {
 }
 
 export function CardTitle({ className, ...props }: ComponentProps<"h3">) {
+  const foreground = useContext(CardForegroundContext);
+
   return (
     <h3
       className={cn(
         "font-display text-xl font-bold tracking-tight",
+        foreground === "accent" && "text-on-accent",
         className,
       )}
       {...props}
@@ -82,8 +94,17 @@ export function CardTitle({ className, ...props }: ComponentProps<"h3">) {
 }
 
 export function CardDescription({ className, ...props }: ComponentProps<"p">) {
+  const foreground = useContext(CardForegroundContext);
+
   return (
-    <p className={cn("text-sm text-fg-mute", className)} {...props} />
+    <p
+      className={cn(
+        "text-sm",
+        foreground === "accent" ? "text-on-accent-soft" : "text-fg-mute",
+        className,
+      )}
+      {...props}
+    />
   );
 }
 

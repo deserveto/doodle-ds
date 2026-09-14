@@ -202,13 +202,13 @@ export function Components() {
           <Card tape tilt={1.5} tone="sun">
             <CardHeader>
               <CardTitle>Taped + tilted</CardTitle>
-              <CardDescription className="text-ink/70">
+              <CardDescription className="text-on-accent-soft">
                 Collage energy: tape strips, slight rotation.
               </CardDescription>
             </CardHeader>
             <CardContent className="relative">
-              <DoodleArrow className="absolute -top-2 right-4 h-16 w-20 rotate-12 text-ink" />
-              <p className="text-sm text-ink/80">
+              <DoodleArrow className="absolute -top-2 right-4 h-16 w-20 rotate-12 text-on-accent" />
+              <p className="text-sm text-on-accent-soft">
                 Continuous line-art arrows point from words to anchors.
               </p>
             </CardContent>
@@ -216,7 +216,7 @@ export function Components() {
           <Card tone="sky">
             <CardHeader>
               <CardTitle>Colorway card</CardTitle>
-              <CardDescription className="text-ink/70">
+              <CardDescription className="text-on-accent-soft">
                 Tinted surfaces for focal moments.
               </CardDescription>
             </CardHeader>

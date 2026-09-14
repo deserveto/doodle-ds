@@ -15,6 +15,8 @@ const palette = [
 
 const semantic = [
   { token: "bg / surface / fg / line", note: "swaps under .dark" },
+  { token: "on-accent / on-accent-soft", note: "ink for bright surfaces" },
+  { token: "fg-mute", note: "lifted in dark mode for small copy" },
   { token: "accent (sun)", note: "primary highlight" },
   { token: "accent-terra / salmon", note: "warm energy" },
   { token: "accent-sky / lavender / mint", note: "cool anchors" },
@@ -70,13 +72,13 @@ export function Foundations() {
 
       <Section id="shape" title="Radii & shadows" kicker="no blur, ever">
         <Demo title="pills + cutout rounds + wobbly sketch borders">
-          <div className="flex h-16 w-40 items-center justify-center rounded-full border-2 border-line bg-accent shadow-pop font-display font-bold">
+          <div className="flex h-16 w-40 items-center justify-center rounded-full border-2 border-line bg-accent text-on-accent shadow-pop font-display font-bold">
             rounded-full
           </div>
-          <div className="flex h-16 w-40 items-center justify-center rounded-cutout border-2 border-line bg-accent-sky shadow-pop font-display font-bold">
+          <div className="flex h-16 w-40 items-center justify-center rounded-cutout border-2 border-line bg-accent-sky text-on-accent shadow-pop font-display font-bold">
             cutout
           </div>
-          <div className="flex h-16 w-40 items-center justify-center rounded-wobbly border-2 border-line bg-accent-salmon shadow-pop font-display font-bold">
+          <div className="flex h-16 w-40 items-center justify-center rounded-wobbly border-2 border-line bg-accent-salmon text-on-accent shadow-pop font-display font-bold">
             wobbly
           </div>
         </Demo>
@@ -106,15 +108,15 @@ export function Foundations() {
           <div className="relative h-20 w-40 overflow-hidden rounded-xl border-2 border-line bg-surface">
             <div className="bg-stipple absolute inset-0" />
           </div>
-          <div className="relative h-20 w-40 overflow-hidden rounded-xl border-2 border-line bg-surface text-ink">
+          <div className="relative h-20 w-40 overflow-hidden rounded-xl border-2 border-line bg-surface text-fg">
             <CrosshatchPatch className="absolute inset-0 h-full w-full opacity-15" />
           </div>
         </Demo>
         <Demo title="motion — pop-in, wiggle, squiggle underline">
-          <span className="animate-pop-in rounded-wobbly-sm border-2 border-line bg-accent px-4 py-2 font-display font-bold shadow-pop-sm">
+          <span className="animate-pop-in rounded-wobbly-sm border-2 border-line bg-accent px-4 py-2 text-on-accent font-display font-bold shadow-pop-sm">
             animate-pop-in
           </span>
-          <span className="animate-wiggle inline-block rounded-wobbly-sm border-2 border-line bg-accent-mint px-4 py-2 font-display font-bold shadow-pop-sm">
+          <span className="animate-wiggle inline-block rounded-wobbly-sm border-2 border-line bg-accent-mint px-4 py-2 text-on-accent font-display font-bold shadow-pop-sm">
             animate-wiggle
           </span>
           <span className="squiggle font-display font-bold">

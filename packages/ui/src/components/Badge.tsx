@@ -8,11 +8,11 @@ export const badgeVariants = cva(
     variants: {
       tone: {
         ink: "bg-fg text-bg",
-        sun: "bg-accent text-ink",
-        terra: "bg-accent-terra text-ink",
-        sky: "bg-accent-sky text-ink",
-        lavender: "bg-accent-lavender text-ink",
-        mint: "bg-accent-mint text-ink",
+        sun: "bg-accent text-on-accent",
+        terra: "bg-accent-terra text-on-accent",
+        sky: "bg-accent-sky text-on-accent",
+        lavender: "bg-accent-lavender text-on-accent",
+        mint: "bg-accent-mint text-on-accent",
       },
       shape: {
         pill: "rounded-full shadow-pop-xs",

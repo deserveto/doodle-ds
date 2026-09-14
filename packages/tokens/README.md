@@ -16,6 +16,7 @@ The package exports `@sangisalarp/tokens/css/tokens.css` and the other files und
 
 - raw palette variables such as `--ds-color-paper` and `--ds-color-ink`;
 - semantic light-mode variables such as `--ds-bg`, `--ds-ink`, and `--ds-line`;
+- `--ds-on-accent` and `--ds-on-accent-soft` foregrounds for readable text on bright surfaces;
 - `.dark` semantic overrides for night mode.
 
 Toggle dark mode by placing `dark` on an ancestor:

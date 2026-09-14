@@ -75,6 +75,8 @@
   --color-fg: var(--ds-ink);
   --color-fg-soft: var(--ds-ink-soft);
   --color-fg-mute: var(--ds-ink-mute);
+  --color-on-accent: var(--ds-on-accent);
+  --color-on-accent-soft: var(--ds-on-accent-soft);
   --color-line: var(--ds-line);
   --color-accent: var(--ds-sun);
   --color-accent-terra: var(--ds-terra);
@@ -155,6 +157,13 @@
   background-position: 0 100%;
   background-size: 24px 6px;
   padding-bottom: 8px;
+}
+
+/* The underline is a tiny SVG texture, so give it a dark-mode stroke too. */
+.dark .squiggle,
+.dark [class~="hover:squiggle"]:hover,
+.dark [role="tab"][data-state="active"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='6' viewBox='0 0 24 6'%3E%3Cpath d='M0 3 Q 3 0 6 3 T 12 3 T 18 3 T 24 3' fill='none' stroke='%23f3efe6' stroke-width='2'/%3E%3C/svg%3E");
 }
 
 @utility rotate-sticker-l {

@@ -52,7 +52,7 @@ export function Alert({
     <div
       role="alert"
       className={cn(
-        "relative rounded-cutout border-2 border-line p-5 pt-6 shadow-pop",
+        "relative rounded-cutout border-2 border-line p-5 pt-6 text-on-accent shadow-pop",
         t.wrap,
         className,
       )}
@@ -62,6 +62,7 @@ export function Alert({
         aria-hidden
         className={cn(
           "absolute -top-3.5 left-6 -rotate-3 rounded-sm border border-line/20 px-4 py-0.5 font-hand text-sm font-bold",
+          "text-on-accent",
           t.tape,
         )}
       >
@@ -76,7 +77,7 @@ export function Alert({
             {title}
           </p>
           {children && (
-            <div className="mt-1 text-sm text-ink-soft">{children}</div>
+            <div className="mt-1 text-sm text-on-accent-soft">{children}</div>
           )}
         </div>
       </div>

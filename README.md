@@ -141,7 +141,7 @@ Add `dark` to the document root (or another ancestor) to switch semantic values:
 </html>
 ```
 
-Brand a section by overriding semantic variables on a wrapper. Keep the ink, line, and focus colors contrast-safe:
+Brand a section by overriding semantic variables on a wrapper. Keep the ink, line, focus, and bright-surface foreground roles contrast-safe:
 
 ```css
 .brand-ocean {
@@ -151,13 +151,15 @@ Brand a section by overriding semantic variables on a wrapper. Keep the ink, lin
   --ds-ink: #102a43;
   --ds-ink-soft: #29465f;
   --ds-ink-mute: #5b7185;
+  --ds-on-accent: #102a43;
+  --ds-on-accent-soft: #29465f;
   --ds-line: #102a43;
   --ds-sun: #ffd166;
   --ds-focus: #2f80ed;
 }
 ```
 
-Raw palette variables (`--ds-color-*`) are available for foundations. Components use semantic variables (`--ds-bg`, `--ds-ink`, `--ds-line`, and the accent variables) so dark mode and brand themes remain predictable.
+Raw palette variables (`--ds-color-*`) are available for foundations. Components use semantic variables (`--ds-bg`, `--ds-ink`, `--ds-line`, the accent variables, and `--ds-on-accent*`) so dark mode and brand themes remain predictable.
 
 ## Accessibility expectations
 

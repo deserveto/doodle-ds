@@ -9,10 +9,10 @@ export const buttonVariants = cva(
       variant: {
         solid:
           "bg-fg text-bg border-line shadow-pop hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-pop-sm",
-        sun: "bg-accent text-ink border-line shadow-pop hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-pop-sm",
+        sun: "bg-accent text-on-accent border-line shadow-pop hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-pop-sm",
         terra:
-          "bg-accent-terra text-ink border-line shadow-pop hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-pop-sm",
-        sky: "bg-accent-sky text-ink border-line shadow-pop hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-pop-sm",
+          "bg-accent-terra text-on-accent border-line shadow-pop hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-pop-sm",
+        sky: "bg-accent-sky text-on-accent border-line shadow-pop hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-pop-sm",
         outline:
           "bg-surface text-fg border-line shadow-pop-sm hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-pop-xs",
         ghost:

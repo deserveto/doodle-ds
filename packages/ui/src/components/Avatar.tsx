@@ -47,10 +47,13 @@ export function Avatar({
   className,
   ...props
 }: AvatarProps) {
+  const foreground = tone === "surface" ? "text-fg" : "text-on-accent";
+
   return (
     <span
       className={cn(
-        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-line font-display font-bold text-ink shadow-pop-xs",
+        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-line font-display font-bold shadow-pop-xs",
+        foreground,
         shape === "pill" ? sizes[size] : circleSizes[size],
         src ? "bg-bg-deep" : tones[tone],
         className,

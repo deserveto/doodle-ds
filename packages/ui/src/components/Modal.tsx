@@ -39,7 +39,7 @@ export function Modal({
           <div className="animate-pop-in relative rounded-cutout border-2 border-line bg-surface p-6 shadow-pop-xl">
             <span
               aria-hidden
-              className="absolute -top-3 left-8 -rotate-2 rounded-sm border border-line/20 bg-accent-salmon/80 px-5 py-0.5 font-hand text-base font-bold"
+              className="absolute -top-3 left-8 -rotate-2 rounded-sm border border-line/20 bg-accent-salmon/80 px-5 py-0.5 font-hand text-base font-bold text-on-accent"
             >
               hey, look!
             </span>

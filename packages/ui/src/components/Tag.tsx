@@ -13,11 +13,11 @@ export interface TagProps extends ComponentProps<"span"> {
 
 const tones: Record<TagTone, string> = {
   ink: "bg-fg text-bg",
-  sun: "bg-accent text-ink",
-  terra: "bg-accent-terra text-ink",
-  sky: "bg-accent-sky text-ink",
-  lavender: "bg-accent-lavender text-ink",
-  mint: "bg-accent-mint text-ink",
+  sun: "bg-accent text-on-accent",
+  terra: "bg-accent-terra text-on-accent",
+  sky: "bg-accent-sky text-on-accent",
+  lavender: "bg-accent-lavender text-on-accent",
+  mint: "bg-accent-mint text-on-accent",
 };
 
 export function Tag({
@@ -29,6 +29,8 @@ export function Tag({
   children,
   ...props
 }: TagProps) {
+  const removeForeground = tone === "ink" ? "text-bg" : "text-on-accent";
+
   return (
     <span
       className={cn(
@@ -50,7 +52,10 @@ export function Tag({
           type="button"
           onClick={onRemove}
           aria-label="Remove"
-          className="-mr-1 ml-0.5 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full text-ink transition-transform duration-100 hover:rotate-90"
+          className={cn(
+            "-mr-1 ml-0.5 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full transition-transform duration-100 hover:rotate-90",
+            removeForeground,
+          )}
         >
           {removeLabel ?? <CloseIcon className="h-3 w-3" />}
         </button>
