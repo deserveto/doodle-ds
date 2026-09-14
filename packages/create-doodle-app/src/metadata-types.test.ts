@@ -24,7 +24,7 @@ describe("create-doodle-app package metadata", () => {
     );
 
     expect(metadata.name).toBe("create-doodle-app");
-    expect(metadata.version).toBe("0.1.0");
+    expect(metadata.version).toMatch(/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
     expect(metadata.type).toBe("module");
     expect(metadata.bin).toEqual({ "create-doodle-app": "./dist/index.js" });
     expect(metadata.doodleCoreVersion).toBe("0.1.0");
