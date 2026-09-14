@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "../../../../packages/ui/src/styles/theme.css";
+
+/* scan ui package sources so component classes compile into the docs build */
+@source "../../../../packages/ui/src";

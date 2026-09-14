@@ -1,0 +1,18 @@
+// Generated from assets/svg/sun.svg — do not edit by hand.
+import { IconBase, type IconProps } from "../create-icon";
+
+export function SunIcon(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M12 8 C 14.1 8.1, 15.9 9.9, 16 12 C 16.1 14.2, 14.2 16, 12 16 C 9.8 16, 8 14.2, 8 12 C 8 9.9, 9.8 8.1, 12 8 Z" />
+  <path d="M11.9 3.2 C 12 4.3, 12 5.3, 12.1 6.3" />
+  <path d="M12.1 17.7 C 12 18.8, 12 19.8, 11.9 20.8" />
+  <path d="M17.8 12.1 C 18.9 12, 19.9 12.1, 20.8 12.1" />
+  <path d="M6.2 11.9 C 5.1 12, 4.1 11.9, 3.2 11.9" />
+  <path d="M16.9 7.1 C 17.5 6.5, 18.1 5.9, 18.7 5.3" />
+  <path d="M7.1 7.2 C 6.5 6.6, 5.9 6, 5.3 5.4" />
+  <path d="M16.8 16.9 C 17.4 17.5, 18 18.1, 18.6 18.7" />
+  <path d="M7.2 16.8 C 6.6 17.4, 6 18, 5.4 18.6" />
+    </IconBase>
+  );
+}

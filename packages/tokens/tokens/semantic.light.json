@@ -1,0 +1,18 @@
+{
+  "semantic": {
+    "bg": { "$value": "{color.paper}", "$type": "color" },
+    "bg-deep": { "$value": "{color.paper-deep}", "$type": "color" },
+    "surface": { "$value": "#ffffff", "$type": "color" },
+    "ink": { "$value": "{color.ink}", "$type": "color" },
+    "ink-soft": { "$value": "{color.ink-soft}", "$type": "color" },
+    "ink-mute": { "$value": "{color.ink-mute}", "$type": "color" },
+    "line": { "$value": "{color.ink}", "$type": "color" },
+    "sun": { "$value": "{color.sun}", "$type": "color" },
+    "terra": { "$value": "{color.terra}", "$type": "color" },
+    "salmon": { "$value": "{color.salmon}", "$type": "color" },
+    "sky": { "$value": "{color.sky}", "$type": "color" },
+    "lavender": { "$value": "{color.lavender}", "$type": "color" },
+    "mint": { "$value": "{color.mint}", "$type": "color" },
+    "focus": { "$value": "{color.sky-deep}", "$type": "color" }
+  }
+}

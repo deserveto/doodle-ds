@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Doodle DS — Logo Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Caveat:wght@700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f9f9f9; --ink: #111111; --sun: #ffe600;
+    --terra: #ff8a5c; --sky: #8ecbff; --lavender: #c9b8ff; --mint: #9be8c8;
+    --night: #17161a; --cream: #f3efe6;
+    --display: "Space Grotesk", sans-serif;
+    --hand: "Caveat", cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: var(--display); padding: 48px;
+  }
+  .noise::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+  header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px; }
+  h1 { font-size: 40px; letter-spacing: -0.03em; }
+  header p { font-family: var(--hand); font-size: 22px; color: #6f6a63; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 28px; }
+  .card {
+    border: 2px solid var(--ink); border-radius: 20px; background: #fff;
+    box-shadow: 5px 5px 0 var(--ink); padding: 24px; display: flex; flex-direction: column;
+  }
+  .card.dark { background: var(--night); border-color: var(--cream); box-shadow: 5px 5px 0 var(--cream); color: var(--cream); }
+  .num {
+    font-family: var(--hand); font-size: 18px; background: var(--sun);
+    border: 2px solid var(--ink); display: inline-block; width: fit-content;
+    padding: 0 10px; border-radius: 26px 8px 22px 10px / 10px 22px 8px 26px;
+    transform: rotate(-2deg); margin-bottom: 14px;
+  }
+  .card.dark .num { border-color: var(--cream); }
+  .stage {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    min-height: 190px; padding: 12px 0;
+  }
+  .card h2 { font-size: 19px; letter-spacing: -0.02em; }
+  .card .note { font-size: 12.5px; color: #6f6a63; margin-top: 4px; line-height: 1.45; }
+  .card.dark .note { color: #97918a; }
+  .sizes { display: flex; align-items: flex-end; gap: 14px; margin-top: 14px; }
+  .sizes span { font-size: 10px; color: #97918a; }
+
+  /* shared doodle vocab */
+  .wob { border-radius: 26px 8px 22px 10px / 10px 22px 8px 26px; }
+  .wob-big { border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .pop-sm { box-shadow: 3px 3px 0 var(--ink); }
+  .tape {
+    position: absolute; width: 46px; height: 16px; background: var(--sky);
+    opacity: .85; border: 1px solid rgba(17,17,17,.15); transform: rotate(-10deg);
+  }
+
+  /* 1. wobbly D */
+  .wob-d {
+    position: relative; width: 120px; height: 120px; background: var(--sun);
+    border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 68px; font-weight: 700; letter-spacing: -0.04em;
+  }
+  .wob-d svg { position: absolute; top: 8px; right: 12px; }
+
+  /* 2. smiley staple */
+  .smiley {
+    width: 120px; height: 120px; background: var(--sun); border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink); position: relative;
+    border-radius: 30px 10px 26px 12px / 12px 26px 10px 30px;
+    transform: rotate(-2deg);
+  }
+
+  /* 3. sticker stack */
+  .stack { position: relative; width: 150px; height: 130px; }
+  .stack .pill {
+    position: absolute; right: 0; bottom: 0; width: 92px; height: 44px;
+    background: var(--sky); border: 3px solid var(--ink); border-radius: 999px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .stack .circle {
+    position: absolute; left: 42px; top: 26px; width: 72px; height: 72px;
+    background: var(--terra); border: 3px solid var(--ink); border-radius: 50%;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .stack .sq {
+    position: absolute; left: 0; top: 0; width: 62px; height: 62px;
+    background: var(--lavender); border: 3px solid var(--ink);
+    border-radius: 22px 7px 18px 9px / 9px 18px 7px 22px;
+    box-shadow: 4px 4px 0 var(--ink); transform: rotate(-6deg);
+  }
+  .stack .tape { top: -10px; left: 52px; }
+
+  /* 4. scribble asterisk */
+  .asterisk { width: 120px; height: 120px; }
+  .asterisk.lg { width: 300px; height: 300px; }
+
+  /* 5. wordmark */
+  .wordmark { text-align: center; }
+  .wordmark .top { font-size: 44px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+  .wordmark .row2 { display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .wordmark .ds {
+    background: var(--ink); color: var(--paper); font-weight: 700; font-size: 22px;
+    padding: 4px 16px; border-radius: 999px; box-shadow: 3px 3px 0 var(--sun);
+  }
+  .wordmark.dark2 .ds { background: var(--sun); color: var(--ink); box-shadow: 3px 3px 0 var(--cream); }
+
+  /* 6. tape monogram */
+  .monogram {
+    position: relative; width: 150px; height: 130px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; border: 2px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+    transform: rotate(-2.5deg); border-radius: 4px;
+  }
+  .monogram b { font-size: 58px; letter-spacing: -0.03em; }
+  .monogram .tape { top: -10px; left: 50%; margin-left: -23px; background: var(--sun); }
+
+  footer {
+    margin-top: 36px; border-top: 2px dashed rgba(17,17,17,.3); padding-top: 18px;
+    display: flex; gap: 28px; flex-wrap: wrap; font-family: var(--hand);
+    font-size: 19px; color: #6f6a63;
+  }
+  footer b { color: var(--ink); font-family: var(--display); font-size: 13px; letter-spacing: 0; display: block; }
+</style>
+</head>
+<body class="noise">
+<header>
+  <h1>Doodle DS — Logo Concepts</h1>
+  <p>pick one, then we refine</p>
+</header>
+
+<div class="grid">
+  <!-- 1 -->
+  <div class="card">
+    <span class="num">01 wobbly D</span>
+    <div class="stage">
+      <div class="wob-d">D
+        <svg width="22" height="22" viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round">
+          <path d="M20 4 L23 16 L35 17 L25 24 L29 36 L20 28 L11 36 L15 24 L5 17 L17 16 Z"/>
+        </svg>
+      </div>
+    </div>
+    <h2>Wobbly D</h2>
+    <p class="note">Geometric D in a wobbly sun square. Star in the corner = the doodle spark. Most "system-native": every stroke is a token.</p>
+    <div class="sizes">
+      <div class="wob-d" style="width:64px;height:64px;font-size:36px;box-shadow:3px 3px 0 var(--ink);border-width:2px"></div>
+      <div class="wob-d" style="width:32px;height:32px;font-size:18px;box-shadow:2px 2px 0 var(--ink);border-width:2px"></div>
+      <span>64 / 32 / 16px</span>
+      <div class="wob-d" style="width:32px;height:32px;font-size:18px;box-shadow:2px 2px 0 var(--ink);border-width:2px;background:var(--ink);color:var(--sun)"></div>
+      <span>1-color</span>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <span class="num">02 smiley staple</span>
+    <div class="stage">
+      <div class="smiley">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <circle cx="42" cy="48" r="7" fill="#111"/>
+          <circle cx="78" cy="48" r="7" fill="#111"/>
+          <path d="M38 74 Q 45 66 52 74 T 66 74 T 80 74" stroke="#111" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+    <h2>Smiley Staple</h2>
+    <p class="note">The hero graphic promoted to mark. Warm, ownable, meme-adjacent. Strongest emotional pull; already lives in the docs.</p>
+    <div class="sizes">
+      <div class="smiley" style="width:64px;height:64px;box-shadow:3px 3px 0 var(--ink);border-width:2px">
+        <svg width="64" height="64" viewBox="0 0 120 120" fill="none"><circle cx="42" cy="48" r="7" fill="#111"/><circle cx="78" cy="48" r="7" fill="#111"/><path d="M38 74 Q 45 66 52 74 T 66 74 T 80 74" stroke="#111" stroke-width="6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="smiley" style="width:32px;height:32px;box-shadow:2px 2px 0 var(--ink);border-width:2px">
+        <svg width="32" height="32" viewBox="0 0 120 120" fill="none"><circle cx="42" cy="48" r="8" fill="#111"/><circle cx="78" cy="48" r="8" fill="#111"/><path d="M40 76 Q 47 68 54 76 T 68 76 T 82 76" stroke="#111" stroke-width="8" stroke-linecap="round"/></svg>
+      </div>
+      <span>64 / 32 / 16px</span>
+      <div class="smiley" style="width:32px;height:32px;box-shadow:2px 2px 0 var(--ink);border-width:2px;background:var(--ink)">
+        <svg width="32" height="32" viewBox="0 0 120 120" fill="none"><circle cx="42" cy="48" r="8" fill="#ffe600"/><circle cx="78" cy="48" r="8" fill="#ffe600"/><path d="M40 76 Q 47 68 54 76 T 68 76 T 82 76" stroke="#ffe600" stroke-width="8" stroke-linecap="round"/></svg>
+      </div>
+      <span>1-color</span>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <span class="num">03 sticker stack</span>
+    <div class="stage">
+      <div class="stack">
+        <span class="tape"></span>
+        <div class="sq"></div><div class="circle"></div><div class="pill"></div>
+      </div>
+    </div>
+    <h2>Sticker Stack</h2>
+    <p class="note">Pill + circle + wobbly square + tape. Metaphor: tokens layer into components layer into product. Reads "system" but busier at 16px.</p>
+    <div class="sizes">
+      <div class="stack" style="width:84px;height:74px;transform:scale(.56);transform-origin:top left"><div class="sq" style="box-shadow:2px 2px 0 var(--ink);border-width:2px"></div><div class="circle" style="box-shadow:2px 2px 0 var(--ink);border-width:2px"></div><div class="pill" style="box-shadow:2px 2px 0 var(--ink);border-width:2px"></div></div>
+      <div class="stack" style="width:42px;height:37px;transform:scale(.28);transform-origin:top left"><div class="sq" style="box-shadow:1px 1px 0 var(--ink);border-width:2px"></div><div class="circle" style="box-shadow:1px 1px 0 var(--ink);border-width:2px"></div><div class="pill" style="box-shadow:1px 1px 0 var(--ink);border-width:2px"></div></div>
+      <span>small sizes degrade</span>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <span class="num">04 scribble asterisk</span>
+    <div class="stage">
+      <svg class="asterisk" viewBox="0 0 120 120" fill="none" stroke="#111" stroke-width="7" stroke-linecap="round">
+        <path d="M60 10 C 58 30, 62 50, 60 70 M60 70 C 59 85, 61 100, 60 112"/>
+        <path d="M14 38 C 32 46, 48 56, 60 70 M60 70 C 74 80, 92 90, 106 96"/>
+        <path d="M14 96 C 32 88, 48 78, 60 70 M60 70 C 74 60, 92 46, 106 34"/>
+      </svg>
+    </div>
+    <h2>Scribble Asterisk</h2>
+    <p class="note">Hand-drawn 6-stroke burst — the Alert icon grown up. Pure line-art, perfect for tape labels and print. Weakest link to "system".</p>
+    <div class="sizes">
+      <svg width="64" height="64" viewBox="0 0 120 120" fill="none" stroke="#111" stroke-width="9" stroke-linecap="round"><path d="M60 10 C 58 30, 62 50, 60 70 C 59 85, 61 100, 60 112"/><path d="M14 38 C 32 46, 48 56, 60 70 C 74 80, 92 90, 106 96"/><path d="M14 96 C 32 88, 48 78, 60 70 C 74 60, 92 46, 106 34"/></svg>
+      <svg width="32" height="32" viewBox="0 0 120 120" fill="none" stroke="#111" stroke-width="12" stroke-linecap="round"><path d="M60 10 C 58 30, 62 50, 60 70 C 59 85, 61 100, 60 112"/><path d="M14 38 C 32 46, 48 56, 60 70 C 74 80, 92 90, 106 96"/><path d="M14 96 C 32 88, 48 78, 60 70 C 74 60, 92 46, 106 34"/></svg>
+      <span>64 / 32 / 16px</span>
+      <svg width="32" height="32" viewBox="0 0 120 120" fill="none" stroke="#ffe600" stroke-width="12" stroke-linecap="round"><path d="M60 10 C 58 30, 62 50, 60 70 C 59 85, 61 100, 60 112"/><path d="M14 38 C 32 46, 48 56, 60 70 C 74 80, 92 90, 106 96"/><path d="M14 96 C 32 88, 48 78, 60 70 C 74 60, 92 46, 106 34"/></svg>
+      <span>1-color</span>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <span class="num">05 squiggle smile wordmark</span>
+    <div class="stage" style="flex-direction:column;gap:22px">
+      <div class="wordmark">
+        <div class="top">doodle</div>
+        <div class="row2">
+          <svg width="86" height="14" viewBox="0 0 86 14" fill="none" stroke="#111" stroke-width="3.5" stroke-linecap="round">
+            <path d="M4 8 Q 11 2 18 8 T 32 8 T 46 8 T 60 8 T 74 8"/>
+            <path d="M74 8 Q 78 6 82 4" stroke-width="3"/>
+          </svg>
+          <span class="ds">DS</span>
+        </div>
+      </div>
+      <div class="wordmark dark2" style="background:var(--night);padding:18px 34px;border-radius:18px">
+        <div class="top" style="color:var(--cream)">doodle</div>
+        <div class="row2">
+          <svg width="86" height="14" viewBox="0 0 86 14" fill="none" stroke="#f3efe6" stroke-width="3.5" stroke-linecap="round">
+            <path d="M4 8 Q 11 2 18 8 T 32 8 T 46 8 T 60 8 T 74 8"/>
+            <path d="M74 8 Q 78 6 82 4" stroke-width="3"/>
+          </svg>
+          <span class="ds">DS</span>
+        </div>
+      </div>
+    </div>
+    <h2>Squiggle Smile</h2>
+    <p class="note">Mark + wordmark in one lockup; squiggle curls into a smile pointing at the DS pill. Dark variant shown below light. Best for site headers.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <span class="num">06 tape monogram</span>
+    <div class="stage">
+      <div class="monogram">
+        <span class="tape"></span>
+        <b>DS</b>
+      </div>
+    </div>
+    <h2>Tape Monogram</h2>
+    <p class="note">Cut-paper zine energy: taped card, crooked, hard shadow. Full of attitude — but illegible under 32px. Merch and cover art only.</p>
+    <div class="sizes">
+      <span style="font-family:var(--hand);font-size:18px">use for posters, not favicons ☝</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div><b>RULE 01</b>no gradients, no blur, no smooth rects — wobbly only</div>
+  <div><b>RULE 02</b>2px ink stroke minimum, hard shadow down-right</div>
+  <div><b>RULE 03</b>must survive single-color print</div>
+  <div><b>RULE 04</b>dark mode swaps paper↔night, ink↔cream only</div>
+</footer>
+</body>
+</html>

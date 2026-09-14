@@ -1,0 +1,11 @@
+// Generated from assets/svg/home.svg — do not edit by hand.
+import { IconBase, type IconProps } from "../create-icon";
+
+export function HomeIcon(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M3.8 9.6 C 6.5 7.5, 9.2 5.4, 12 3.4 C 14.8 5.4, 17.5 7.5, 20.2 9.7 C 20.2 12.6, 20.1 15.5, 20.2 18.3 C 20.2 19.4, 19.5 20.1, 18.4 20.1 C 14.1 20.2, 9.9 20.1, 5.6 20.1 C 4.5 20.1, 3.8 19.4, 3.8 18.3 C 3.7 15.4, 3.8 12.5, 3.8 9.6 Z" />
+  <path d="M9.9 20 C 9.8 17.8, 9.9 15.6, 9.9 13.4 C 9.9 12.8, 10.3 12.4, 10.9 12.4 C 11.6 12.3, 12.4 12.4, 13.1 12.4 C 13.7 12.4, 14.1 12.8, 14.1 13.4 C 14.2 15.6, 14.1 17.8, 14.1 19.9" />
+    </IconBase>
+  );
+}

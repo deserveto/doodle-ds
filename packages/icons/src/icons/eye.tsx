@@ -1,0 +1,11 @@
+// Generated from assets/svg/eye.svg — do not edit by hand.
+import { IconBase, type IconProps } from "../create-icon";
+
+export function EyeIcon(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M3.2 12.2 C 5.4 7.6, 8.6 5.2, 12 5.2 C 15.4 5.2, 18.6 7.6, 20.8 12.1 C 18.6 16.5, 15.4 18.8, 12 18.8 C 8.6 18.8, 5.4 16.6, 3.2 12.2 Z" />
+  <path d="M12 8.8 C 13.8 8.9, 15.2 10.3, 15.2 12.1 C 15.2 13.9, 13.8 15.2, 12 15.2 C 10.2 15.2, 8.9 13.9, 8.8 12.1 C 8.9 10.3, 10.3 8.8, 12 8.8 Z" />
+    </IconBase>
+  );
+}

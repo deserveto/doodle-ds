@@ -1,0 +1,10 @@
+// Generated from assets/svg/folder.svg — do not edit by hand.
+import { IconBase, type IconProps } from "../create-icon";
+
+export function FolderIcon(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M18.6 19.9 C 14.3 20, 9.9 19.9, 5.6 19.9 C 4.6 19.9, 3.9 19.2, 3.9 18.2 C 3.8 14.6, 3.9 11, 3.9 7.4 C 3.9 6.4, 4.6 5.7, 5.6 5.7 C 6.7 5.6, 7.8 5.7, 8.8 5.7 C 9.3 5.7, 9.8 6, 10.1 6.4 C 10.5 7, 10.9 7.6, 11.3 8.1 C 11.6 8.5, 12 8.7, 12.6 8.7 C 14.5 8.6, 16.5 8.7, 18.4 8.7 C 19.4 8.7, 20.1 9.4, 20.1 10.4 C 20.2 13, 20.1 15.6, 20.1 18.2 C 20.1 19.2, 19.5 19.9, 18.6 19.9 Z" />
+    </IconBase>
+  );
+}

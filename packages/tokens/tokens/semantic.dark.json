@@ -1,0 +1,18 @@
+{
+  "dark": {
+    "bg": { "$value": "{color.night}", "$type": "color" },
+    "bg-deep": { "$value": "{color.night-deep}", "$type": "color" },
+    "surface": { "$value": "{color.night-soft}", "$type": "color" },
+    "ink": { "$value": "{color.cream}", "$type": "color" },
+    "ink-soft": { "$value": "#d4cfc4", "$type": "color" },
+    "ink-mute": { "$value": "#97918a", "$type": "color" },
+    "line": { "$value": "{color.cream}", "$type": "color" },
+    "sun": { "$value": "{color.sun}", "$type": "color" },
+    "terra": { "$value": "{color.terra}", "$type": "color" },
+    "salmon": { "$value": "{color.salmon}", "$type": "color" },
+    "sky": { "$value": "{color.sky}", "$type": "color" },
+    "lavender": { "$value": "{color.lavender}", "$type": "color" },
+    "mint": { "$value": "{color.mint}", "$type": "color" },
+    "focus": { "$value": "{color.sky}", "$type": "color" }
+  }
+}

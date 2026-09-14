@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 136" width="136" height="136">
+  <!-- dark mode: night square, cream strokes, sun stays -->
+  <path fill="#f3efe6" d="M35 13 C 65 11, 100 12, 113 15 C 123 18, 126 27, 125 45 C 124.5 75, 126 100, 122 113 C 119 124, 109 126, 90 125 C 60 123.5, 35 125, 23 121 C 14 118, 12 109, 13 90 C 14 60, 12 35, 16 23 C 19 15, 25 13.5, 35 13 Z"/>
+  <path fill="#ffe600" stroke="#f3efe6" stroke-width="4" d="M30 8 C 60 6, 95 7, 108 10 C 118 13, 121 22, 120 40 C 119.5 70, 121 95, 117 108 C 114 119, 104 121, 85 120 C 55 118.5, 30 120, 18 116 C 9 113, 7 104, 8 85 C 9 55, 7 30, 11 18 C 14 10, 20 8.5, 30 8 Z"/>
+  <circle cx="46" cy="52" r="8" fill="#17161a"/>
+  <circle cx="82" cy="52" r="8" fill="#17161a"/>
+  <path d="M38 86 Q 46 74 54 86 T 70 86 T 86 86" fill="none" stroke="#17161a" stroke-width="8" stroke-linecap="round"/>
+</svg>

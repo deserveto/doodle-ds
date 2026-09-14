@@ -1,0 +1,23 @@
+{
+  "color": {
+    "paper": { "$value": "#f9f9f9", "$type": "color", "$description": "Crisp paper background" },
+    "paper-deep": { "$value": "#efedea", "$type": "color" },
+    "ink": { "$value": "#111111", "$type": "color", "$description": "Deep ink black" },
+    "ink-soft": { "$value": "#3d3a36", "$type": "color" },
+    "ink-mute": { "$value": "#6f6a63", "$type": "color" },
+    "sun": { "$value": "#ffe600", "$type": "color", "$description": "Sunshine yellow accent" },
+    "sun-soft": { "$value": "#fff29e", "$type": "color" },
+    "terra": { "$value": "#ff8a5c", "$type": "color" },
+    "terra-deep": { "$value": "#e2725b", "$type": "color" },
+    "salmon": { "$value": "#ff9aa8", "$type": "color" },
+    "sky": { "$value": "#8ecbff", "$type": "color" },
+    "sky-deep": { "$value": "#5aa9f2", "$type": "color" },
+    "lavender": { "$value": "#c9b8ff", "$type": "color" },
+    "lavender-deep": { "$value": "#a58ef2", "$type": "color" },
+    "mint": { "$value": "#9be8c8", "$type": "color" },
+    "night": { "$value": "#17161a", "$type": "color" },
+    "night-deep": { "$value": "#101013", "$type": "color" },
+    "night-soft": { "$value": "#242229", "$type": "color" },
+    "cream": { "$value": "#f3efe6", "$type": "color" }
+  }
+}

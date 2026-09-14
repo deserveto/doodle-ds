@@ -1,0 +1,35 @@
+{
+  "name": "@doodle-ds/tokens",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Doodle DS design tokens — DTCG source built to CSS variables",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deserveto/doodle-ds.git",
+    "directory": "packages/tokens"
+  },
+  "bugs": {
+    "url": "https://github.com/deserveto/doodle-ds/issues"
+  },
+  "homepage": "https://github.com/deserveto/doodle-ds#readme",
+  "sideEffects": [
+    "./dist/css/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "./css": "./dist/css/tokens.css",
+    "./css/*": "./dist/css/*"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "style-dictionary build --config sd.config.mjs"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.5.3"
+  }
+}

@@ -1,0 +1,165 @@
+/* ---------------------------------------------------------------------------
+ * Doodle DS theme — Tailwind v4 theme, base styles, doodle utilities.
+ * Compiled by: @doodle-ds/ui (dist/theme.css), docs app, consumers.
+ * Depends on: @doodle-ds/tokens/css (defines --ds-* variables).
+ * ------------------------------------------------------------------------- */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* raw palette — sourced from @doodle-ds/tokens */
+  --color-paper: var(--ds-color-paper);
+  --color-paper-deep: var(--ds-color-paper-deep);
+  --color-ink: var(--ds-color-ink);
+  --color-ink-soft: var(--ds-color-ink-soft);
+  --color-ink-mute: var(--ds-color-ink-mute);
+  --color-sun: var(--ds-color-sun);
+  --color-sun-soft: var(--ds-color-sun-soft);
+  --color-terra: var(--ds-color-terra);
+  --color-terra-deep: var(--ds-color-terra-deep);
+  --color-salmon: var(--ds-color-salmon);
+  --color-sky: var(--ds-color-sky);
+  --color-sky-deep: var(--ds-color-sky-deep);
+  --color-lavender: var(--ds-color-lavender);
+  --color-lavender-deep: var(--ds-color-lavender-deep);
+  --color-mint: var(--ds-color-mint);
+  --color-night: var(--ds-color-night);
+  --color-night-deep: var(--ds-color-night-deep);
+  --color-night-soft: var(--ds-color-night-soft);
+  --color-cream: var(--ds-color-cream);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", ui-serif, cursive;
+
+  /* radii — mixed vocabulary: pills + cutout rounds + wobble */
+  --radius-cutout: 1.25rem;
+  --radius-blob: 2rem;
+
+  /* hard offset shadows (never blur) */
+  --shadow-pop-xs: 2px 2px 0 0 var(--ds-line);
+  --shadow-pop-sm: 3px 3px 0 0 var(--ds-line);
+  --shadow-pop: 4px 4px 0 0 var(--ds-line);
+  --shadow-pop-lg: 6px 6px 0 0 var(--ds-line);
+  --shadow-pop-xl: 9px 9px 0 0 var(--ds-line);
+
+  --animate-pop-in: pop-in 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animate-wiggle: wiggle 2.4s ease-in-out infinite;
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.92) rotate(-1deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-1.2deg);
+    }
+    50% {
+      transform: rotate(1.2deg);
+    }
+  }
+}
+
+/* semantic tokens — flip under .dark (values from @doodle-ds/tokens) */
+@theme inline {
+  --color-bg: var(--ds-bg);
+  --color-bg-deep: var(--ds-bg-deep);
+  --color-surface: var(--ds-surface);
+  --color-fg: var(--ds-ink);
+  --color-fg-soft: var(--ds-ink-soft);
+  --color-fg-mute: var(--ds-ink-mute);
+  --color-line: var(--ds-line);
+  --color-accent: var(--ds-sun);
+  --color-accent-terra: var(--ds-terra);
+  --color-accent-salmon: var(--ds-salmon);
+  --color-accent-sky: var(--ds-sky);
+  --color-accent-lavender: var(--ds-lavender);
+  --color-accent-mint: var(--ds-mint);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    background: var(--ds-bg);
+    color: var(--ds-ink);
+  }
+
+  ::selection {
+    background: var(--ds-sun);
+    color: var(--color-ink);
+  }
+
+  * {
+    border-color: var(--ds-line);
+  }
+
+  :focus-visible {
+    outline: 2px dashed var(--ds-focus);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Doodle utilities
+ * ------------------------------------------------------------------------- */
+@utility bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+@utility bg-stipple {
+  background-image: radial-gradient(var(--ds-line) 1px, transparent 1px);
+  background-size: 14px 14px;
+  opacity: 0.12;
+}
+
+@utility bg-crosshatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--ds-line) 0 1px,
+    transparent 1px 9px
+  );
+  opacity: 0.07;
+}
+
+/* hand-drawn wobbly border-radius (classic sketch trick) */
+@utility rounded-wobbly {
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+@utility rounded-wobbly-sm {
+  border-radius: 26px 8px 22px 10px / 10px 22px 8px 26px;
+}
+
+/* squiggle underline for active tabs / links */
+@utility squiggle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='6' viewBox='0 0 24 6'%3E%3Cpath d='M0 3 Q 3 0 6 3 T 12 3 T 18 3 T 24 3' fill='none' stroke='%23111111' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: 0 100%;
+  background-size: 24px 6px;
+  padding-bottom: 8px;
+}
+
+@utility rotate-sticker-l {
+  transform: rotate(-2.5deg);
+}
+@utility rotate-sticker-r {
+  transform: rotate(2deg);
+}

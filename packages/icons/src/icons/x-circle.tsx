@@ -1,0 +1,12 @@
+// Generated from assets/svg/x-circle.svg — do not edit by hand.
+import { IconBase, type IconProps } from "../create-icon";
+
+export function XCircleIcon(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M11.9 3.7 C 16.5 3.6, 20.3 7.4, 20.3 12 C 20.3 16.6, 16.5 20.4, 11.9 20.3 C 7.4 20.2, 3.7 16.5, 3.7 12 C 3.7 7.5, 7.4 3.8, 11.9 3.7 Z" />
+  <path d="M9.2 9.3 C 11.1 11.3, 12.9 13, 14.9 15.1" />
+  <path d="M14.9 9.2 C 13 11.2, 11.2 13, 9.2 15" />
+    </IconBase>
+  );
+}

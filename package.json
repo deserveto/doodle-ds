@@ -1,0 +1,49 @@
+{
+  "name": "doodle-ds-monorepo",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "packageManager": "npm@11.12.1",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @doodle-ds/tokens && npm run build -w @doodle-ds/icons && npm run build -w @doodle-ds/ui && npm run build -w @doodle-ds/docs",
+    "dev": "npm run dev -w @doodle-ds/docs",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "audit:production": "npm audit --omit=dev",
+    "check": "npm run lint && npm run typecheck && npm test && npm run audit:production && npm run build",
+    "verify": "npm run check && npm run test:e2e",
+    "changeset": "changeset",
+    "version-packages": "changeset version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deserveto/doodle-ds.git"
+  },
+  "bugs": {
+    "url": "https://github.com/deserveto/doodle-ds/issues"
+  },
+  "homepage": "https://github.com/deserveto/doodle-ds#readme",
+  "devDependencies": {
+    "@changesets/cli": "^2.29.6",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "eslint": "^10.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "jsdom": "^30.0.1",
+    "style-dictionary": "^5.5.3",
+    "typescript-eslint": "^8.70.0",
+    "vitest": "^5.0.0"
+  }
+}

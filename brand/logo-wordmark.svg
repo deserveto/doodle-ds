@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 150" width="420" height="150">
+  <defs>
+    <style>
+      .word { font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif; font-weight: 700; letter-spacing: -0.04em; }
+    </style>
+  </defs>
+  <!-- "doodle" -->
+  <text class="word" x="16" y="72" font-size="76" fill="#111111">doodle</text>
+  <!-- squiggle smile, curling toward the pill -->
+  <path d="M20 112 Q 34 96 48 112 T 76 112 T 104 112 T 132 112" fill="none" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+  <path d="M132 112 Q 145 106 156 96" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round"/>
+  <!-- DS pill sticker -->
+  <g transform="rotate(-3 268 104)">
+    <rect x="216" y="78" width="104" height="52" rx="26" fill="#111111"/>
+    <text class="word" x="268" y="114" font-size="34" fill="#f9f9f9" text-anchor="middle">DS</text>
+  </g>
+  <!-- staple corner: tiny star -->
+  <path d="M356 96 L360 108 L372 109 L362 116 L366 128 L356 120 L346 128 L350 116 L340 109 L352 108 Z" fill="#ffe600" stroke="#111111" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>

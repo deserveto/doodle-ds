@@ -1,0 +1,14 @@
+// Generated from assets/svg/eye-off.svg — do not edit by hand.
+import { IconBase, type IconProps } from "../create-icon";
+
+export function EyeOffIcon(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M4.2 4.4 C 9 9.2, 14 14.2, 19.7 19.6" />
+  <path d="M4 11.6 C 4.8 9.7, 6 8.1, 7.4 7" />
+  <path d="M10.3 5.5 C 13.9 5.2, 17.5 7.4, 19.9 11.9" />
+  <path d="M19.8 12.1 C 17.6 16.3, 14.5 18.5, 11.2 18.6" />
+  <path d="M8.3 17.9 C 6.2 16.7, 4.8 14.7, 4 12.2" />
+    </IconBase>
+  );
+}
