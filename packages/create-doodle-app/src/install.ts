@@ -1,6 +1,6 @@
 import type { CommandSpec } from "./types";
 
-export type PackageManager = "npm";
+export type PackageManager = string;
 
 export function buildInstallCommand(
   packageManager: PackageManager,

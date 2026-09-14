@@ -1,12 +1,15 @@
-import { basename, join, resolve } from "node:path";
+import { basename, join, resolve, sep } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   validateProjectDirectory,
   type DirectoryFsApi,
 } from "./validation";
 
+const fixtureCwd = resolve("validation-fixture");
+
 function fakeFs(
   entries: Record<string, { kind: "directory"; entries: string[] } | { kind: "file" }> = {},
+  realpaths: Record<string, string> = {},
 ): DirectoryFsApi {
   return {
     async stat(path) {
@@ -25,11 +28,23 @@ function fakeFs(
 
       return [...entry.entries];
     },
+    async realpath(path) {
+      if (realpaths[path]) {
+        return realpaths[path];
+      }
+      if (path === fixtureCwd || entries[path]) {
+        return path;
+      }
+      if (Object.keys(realpaths).some((link) => path.startsWith(`${link}${sep}`))) {
+        throw Object.assign(new Error(`ENOENT: ${path}`), { code: "ENOENT" });
+      }
+      return path;
+    },
   };
 }
 
 describe("validateProjectDirectory", () => {
-  const cwd = resolve("validation-fixture");
+  const cwd = fixtureCwd;
 
   it("permits a valid npm project name at a new destination", async () => {
     const destination = join(cwd, "my-doodle-app");
@@ -41,7 +56,7 @@ describe("validateProjectDirectory", () => {
     });
   });
 
-  it.each(["My App", "UPPERCASE", ".hidden", "node_modules", "name%encoded"])(
+  it.each(["My App", "UPPERCASE", ".hidden", "node_modules", "favicon.ico", "name%encoded"])(
     "rejects the invalid npm project name %s",
     async (name) => {
       await expect(validateProjectDirectory(name, cwd, fakeFs())).rejects.toThrow(
@@ -58,6 +73,41 @@ describe("validateProjectDirectory", () => {
 
   it("rejects a destination that escapes the working directory", async () => {
     await expect(validateProjectDirectory(join("..", "escape"), cwd, fakeFs())).rejects.toThrow(
+      /inside the current working directory/i,
+    );
+  });
+
+  it("rejects an absolute destination outside the working directory", async () => {
+    const outsideDestination = resolve(cwd, "..", "outside-app");
+
+    await expect(validateProjectDirectory(outsideDestination, cwd, fakeFs())).rejects.toThrow(
+      /inside the current working directory/i,
+    );
+  });
+
+  it("rejects an existing symlink destination whose target escapes the working directory", async () => {
+    const destination = join(cwd, "linked-app");
+    const outsideDestination = resolve(cwd, "..", "outside-app");
+    const fsApi = fakeFs(
+      { [destination]: { kind: "directory", entries: [] } },
+      { [destination]: outsideDestination },
+    );
+
+    await expect(validateProjectDirectory("linked-app", cwd, fsApi)).rejects.toThrow(
+      /inside the current working directory/i,
+    );
+  });
+
+  it("rejects a new destination beneath a symlinked parent whose target escapes the working directory", async () => {
+    const parent = join(cwd, "linked-parent");
+    const destination = join(parent, "my-app");
+    const outsideParent = resolve(cwd, "..", "outside-parent");
+    const fsApi = fakeFs(
+      { [parent]: { kind: "directory", entries: [] } },
+      { [parent]: outsideParent },
+    );
+
+    await expect(validateProjectDirectory(destination, cwd, fsApi)).rejects.toThrow(
       /inside the current working directory/i,
     );
   });

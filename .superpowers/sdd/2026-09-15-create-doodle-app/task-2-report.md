@@ -46,3 +46,15 @@ No existing README or unrelated documentation file was changed by this task.
 - The Task 2 brief names a three-argument `validateProjectDirectory(input, cwd, fsApi)` API while requiring forced validation. The implementation preserves those arguments and adds an optional fourth `{ force?: boolean }` object; default behavior remains safe and refuses non-empty directories.
 - This task only plans the npm install command. The Task 4 coordinator remains responsible for not building or running it when `skipInstall` is true.
 - Validation deliberately performs no writes or deletion. Safe file creation/overwrite behavior is the responsibility of the template writer in the later task, using the approved resolved destination.
+
+## Follow-up fix — canonical symlink containment
+
+Task 2 review identified that lexical containment alone could accept a destination or parent symlink/junction resolving outside the working directory. The validator now canonicalizes the working directory and destination with the injected `realpath` API (walking up to the nearest existing parent for new destinations) before applying the containment check. The npm package-manager input is a string so unsupported-manager validation remains reachable, and the invalid-name guidance now includes tildes.
+
+Added regression coverage for absolute outside paths, reserved `favicon.ico`, existing symlink destinations, and new destinations under symlinked parents. The test filesystem now models canonical paths while remaining Windows-compatible.
+
+Verification after the fix:
+
+- Focused validation/install tests (RED before implementation: 2 symlink-escape failures; GREEN after implementation): 2 files passed, 18 tests passed.
+- `npx eslint packages/create-doodle-app/src/validation.ts packages/create-doodle-app/src/validation.test.ts packages/create-doodle-app/src/install.ts packages/create-doodle-app/src/install.test.ts`: passed.
+- `npm run typecheck -w create-doodle-app`: passed.

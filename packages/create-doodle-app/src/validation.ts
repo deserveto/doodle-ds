@@ -1,9 +1,10 @@
-import { readdir, stat } from "node:fs/promises";
-import { basename, isAbsolute, relative, resolve, sep } from "node:path";
+import { readdir, realpath, stat } from "node:fs/promises";
+import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 
 export interface DirectoryFsApi {
   stat(path: string): Promise<{ isDirectory(): boolean }>;
   readdir(path: string): Promise<string[]>;
+  realpath(path: string): Promise<string>;
 }
 
 export interface DirectoryDecision {
@@ -22,6 +23,9 @@ const defaultFsApi: DirectoryFsApi = {
   },
   async readdir(path) {
     return readdir(path);
+  },
+  async realpath(path) {
+    return realpath(path);
   },
 };
 
@@ -42,6 +46,42 @@ function isMissingPath(error: unknown): boolean {
     error !== null &&
     "code" in error &&
     error.code === "ENOENT"
+  );
+}
+
+async function canonicalizePath(path: string, fsApi: DirectoryFsApi): Promise<string> {
+  let unresolvedPath = resolve(path);
+  const missingSegments: string[] = [];
+
+  while (true) {
+    try {
+      let canonicalPath = resolve(await fsApi.realpath(unresolvedPath));
+      for (let index = missingSegments.length - 1; index >= 0; index -= 1) {
+        canonicalPath = join(canonicalPath, missingSegments[index]);
+      }
+      return canonicalPath;
+    } catch (error) {
+      if (!isMissingPath(error)) {
+        throw error;
+      }
+
+      const parentPath = dirname(unresolvedPath);
+      if (parentPath === unresolvedPath) {
+        throw error;
+      }
+
+      missingSegments.push(basename(unresolvedPath));
+      unresolvedPath = parentPath;
+    }
+  }
+}
+
+function isWithinDirectory(directory: string, candidate: string): boolean {
+  const relativeCandidate = relative(directory, candidate);
+  return (
+    relativeCandidate !== ".." &&
+    !relativeCandidate.startsWith(`..${sep}`) &&
+    !isAbsolute(relativeCandidate)
   );
 }
 
@@ -67,10 +107,16 @@ export async function validateProjectDirectory(
     throw new Error("The project directory must be inside the current working directory.");
   }
 
+  const canonicalWorkingDirectory = await canonicalizePath(workingDirectory, fsApi);
+  const canonicalProjectDirectory = await canonicalizePath(projectDirectory, fsApi);
+  if (!isWithinDirectory(canonicalWorkingDirectory, canonicalProjectDirectory)) {
+    throw new Error("The project directory must be inside the current working directory.");
+  }
+
   const projectName = basename(projectDirectory);
   if (!isValidProjectName(projectName)) {
     throw new Error(
-      `"${projectName}" is not a valid npm package name. Use lowercase letters, numbers, dots, hyphens, or underscores.`,
+      `"${projectName}" is not a valid npm package name. Use lowercase letters, numbers, dots, hyphens, underscores, or tildes.`,
     );
   }
 

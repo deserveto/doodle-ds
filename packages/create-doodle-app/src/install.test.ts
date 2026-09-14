@@ -11,7 +11,7 @@ describe("buildInstallCommand", () => {
   });
 
   it("rejects unsupported package managers", () => {
-    expect(() => buildInstallCommand("pnpm" as "npm", "C:\\work\\my-app")).toThrow(
+    expect(() => buildInstallCommand("pnpm", "C:\\work\\my-app")).toThrow(
       /unsupported package manager.*pnpm/i,
     );
   });
